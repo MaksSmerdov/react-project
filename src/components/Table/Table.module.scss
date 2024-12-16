@@ -1,52 +1,3 @@
-// Основные стили
-.currentParam {
-  margin-right: 15px;
-  background-color: #e7eef4;
-  box-shadow: 0 0 5px 1px black;
-  border-radius: 5px;
-
-  &__title {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-    text-align: center;
-    font-family: "Bitter", sans-serif;
-    font-size: 24px;
-    line-height: 30px;
-    font-weight: 700;
-    color: green;
-
-    &-span {
-      font-size: 22px;
-      font-weight: 600;
-      color: black;
-    }
-  }
-
-  &__box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__date,
-  &__time {
-    margin-right: 20px;
-    font-family: "Bitter", sans-serif;
-    font-size: 22px;
-    line-height: 30px;
-    font-weight: 600;
-    color: black;
-  }
-}
-
-// Стили таблиц
-.tables {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
 .table {
   margin-top: 30px;
   margin-right: 15px;
@@ -60,7 +11,6 @@
   &__title {
     margin-bottom: 10px;
     text-align: center;
-    font-family: "Bitter", sans-serif;
     font-size: 18px;
     line-height: 25px;
     font-weight: 700;
