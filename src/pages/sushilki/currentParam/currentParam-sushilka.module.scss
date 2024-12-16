@@ -1,0 +1,114 @@
+// Основные стили
+.currentParam {
+  margin-right: 15px;
+  background-color: #e7eef4;
+  box-shadow: 0 0 5px 1px black;
+  border-radius: 5px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: "Bitter", sans-serif;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700;
+    color: green;
+
+    &-span {
+      font-size: 22px;
+      font-weight: 600;
+      color: black;
+    }
+  }
+
+  &__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__date,
+  &__time {
+    margin-right: 20px;
+    font-family: "Bitter", sans-serif;
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 600;
+    color: black;
+  }
+}
+
+// Стили таблиц
+.tables {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.table {
+  margin-top: 30px;
+  margin-right: 15px;
+  width: 410px;
+  text-align: left;
+  border-collapse: collapse;
+  border-spacing: 5px;
+  background-color: #e7eef4;
+  box-shadow: 0 0 5px 0 black;
+
+  &__title {
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Bitter", sans-serif;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 700;
+    color: green;
+  }
+
+  &__tr {
+    height: 30px;
+    border: 1px solid black;
+
+    &:nth-child(even) {
+      background-color: #e7eef4;
+    }
+  }
+
+  &__th {
+    text-align: center;
+    font-family: "Bitter", sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: black;
+
+    &:not(:last-child) {
+      border-right: 1px solid black;
+    }
+  }
+
+  &__td {
+    letter-spacing: 1px;
+    text-align: center;
+    font-family: "Bitter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+
+    &.table__left {
+      padding: 10px;
+      padding-left: 30px;
+      text-align: left;
+    }
+
+    &.table__right {
+      color: green;
+      font-weight: 600;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid black;
+    }
+  }
+}
