@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close"; // Иконка крестика
-import styles from "./CustomModal.module.scss";
+import styles from "./Modal.module.scss";
 
 interface CustomModalProps {
   open: boolean; // Состояние открытия/закрытия модалки

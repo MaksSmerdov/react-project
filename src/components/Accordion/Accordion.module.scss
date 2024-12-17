@@ -1,0 +1,29 @@
+.accordionContainer {
+  width: 95%;
+  padding-top: 10px;
+
+  /* Таргетим глобальные классы Material-UI внутри контейнера */
+  :global(.MuiAccordion-root) {
+    margin-bottom: 10px;
+    transition: margin-bottom 0.3s ease; // Плавный переход при изменении отступа
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); // Добавление тени
+    border-radius: 8px; // Скругление углов
+  }
+
+  :global(.MuiAccordionSummary-root) {
+    background-color: #f5f5f5;
+  }
+
+  :global(.MuiAccordionDetails-root) {
+    padding: 16px;
+  }
+
+  /* Дополнительно: Изменение тени при наведении и раскрытии */
+  :global(.MuiAccordion-root:hover) {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  :global(.MuiAccordion-root.Mui-expanded) {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  }
+}

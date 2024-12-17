@@ -45,6 +45,24 @@
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
 
+    &.enabledHover {
+      &:hover {
+        background-color: green;
+        
+        .mnemo__param-text {
+          color: white;
+        }
+      }
+    
+      &:active {
+        box-shadow: 0 0 0 3px white, 0 0 0 6px green;
+        
+        .mnemo__param-text {
+          color: white;
+        }
+      }
+    }
+
     &-text{
       @include mixins.text-style(16px, 16px, 600, vars.$blue);
       transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -115,27 +133,6 @@
   &__img {
     width: 1616px;
     opacity: 1;
-  }
-}
-
-.mnemo__param {
-
-  &.enabledHover {
-    &:hover {
-      background-color: green;
-
-      .mnemo__param-text {
-        color: white;
-      }
-    }
-
-    &:active {
-      box-shadow: 0 0 0 3px white, 0 0 0 6px green;
-
-      .mnemo__param-text {
-        color: white;
-      }
-    }
   }
 }
 

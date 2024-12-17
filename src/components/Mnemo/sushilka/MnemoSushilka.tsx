@@ -1,19 +1,14 @@
-// src/components/MnemoDryer/MnemoDryer.tsx
+// src/components/MnemoSushilka/MnemoSushilka.tsx
+
 import React, { useState } from "react";
 import styles from "./MnemoSushilka.module.scss";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import { apiConfigs } from "../../../config/apiConfig";
 import useMnemoDryer from "./useMnemoSushilka";
-import CustomModal from "../../CustomModal/CustomModal"; // Импорт нового компонента
-// Импорт компонентов MUI для аккордеона
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import CustomModal from "../../Modal/Modal"; // Импорт нового компонента
+import DocumentationAccordion from "../../Accordion/Accordion";
+import { AccordionItems } from "./AccordionItems";
+import Tooltip from "../../Tooltip/Tooltip";
+import { TooltipItems } from "./TooltipItems";
 
 interface MnemoDryerProps<K extends keyof typeof apiConfigs> {
   configKey: K; // Ключ конфигурации (sushilka1, sushilka2 и т.д.)
@@ -22,18 +17,16 @@ interface MnemoDryerProps<K extends keyof typeof apiConfigs> {
 
 const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title }: MnemoDryerProps<K>) => {
   // Используем хук с выбранной конфигурацией
-  const { data, tooltipsEnabled, toggleTooltips, isHovered, setIsHovered } = useMnemoDryer({
+  const { data, tooltipsEnabled, toggleTooltips } = useMnemoDryer({
     config: apiConfigs[configKey],
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для открытия/закрытия модалки
-  const [expandedAccordion, setExpandedAccordion] = useState<string | false>(false); // Состояние для аккордеона
 
-  const handleAccordionChange = (panel: string) => (
-    event: React.SyntheticEvent,
-    isExpanded: boolean
-  ) => {
-    setExpandedAccordion(isExpanded ? panel : false);
+  // Функция для получения содержимого тултипа по id
+  const getTooltipContent = (tooltipId: string): React.ReactNode => {
+    const tooltip = TooltipItems.find(item => item.id === tooltipId);
+    return tooltip ? tooltip.content : null;
   };
 
   return (
@@ -68,100 +61,14 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title }: Mne
         title="Список документации"
         onClose={() => setIsModalOpen(false)}
       >
-        {/* Использование MUI Accordion для секций */}
+        {/* Использование нового компонента DocumentationAccordion */}
         <div className="mnemo__modal-window">
-          {/* Секция "Схемы проекта" */}
-          <Accordion
-            expanded={expandedAccordion === "schemes"}
-            onChange={handleAccordionChange("schemes")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="schemes-content"
-              id="schemes-header"
-            >
-              <strong>Схемы проекта</strong>
-            </AccordionSummary>
-            <AccordionDetails>
-              <ul className="list-reset">
-                <li className="modal__accordion-content-item">
-                  <div className="modal-content__link">Общие данные</div>
-                  <div className="modal-content__link-container">
-                    <a
-                      className="modal-content__link-download"
-                      href="/production/carbon/sushilki/modal-content/schemes/common_data_sushilka.dwg"
-                      download
-                    >
-                      Скачать DWG
-                    </a>
-                    <a
-                      className="modal-content__link-download"
-                      href="/production/carbon/sushilki/modal-content/schemes/PDF/common_data_sushilka.pdf"
-                      download
-                    >
-                      Скачать PDF
-                    </a>
-                  </div>
-                </li>
-                <li className="modal__accordion-content-item">
-                  <div className="modal-content__link">Структурная схема</div>
-                  <div className="modal-content__link-container">
-                    <a
-                      className="modal-content__link-download"
-                      href="/production/carbon/sushilki/modal-content/schemes/structural_sushilka.dwg"
-                      download
-                    >
-                      Скачать DWG
-                    </a>
-                    <a
-                      className="modal-content__link-download"
-                      href="/production/carbon/sushilki/modal-content/schemes/PDF/structural_sushilka.pdf"
-                      download
-                    >
-                      Скачать PDF
-                    </a>
-                  </div>
-                </li>
-                {/* Добавьте другие элементы схем по необходимости */}
-              </ul>
-            </AccordionDetails>
-          </Accordion>
-
-          {/* Секция "Программы" */}
-          <Accordion
-            expanded={expandedAccordion === "programs"}
-            onChange={handleAccordionChange("programs")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="programs-content"
-              id="programs-header"
-            >
-              <strong>Программы</strong>
-            </AccordionSummary>
-            <AccordionDetails>
-              <ul className="list-reset">
-                <li className="modal__accordion-content-item">
-                  <div className="modal-content__link">Программа управления</div>
-                  <div className="modal-content__link-container">
-                    <a
-                      className="modal-content__link-download"
-                      href="/production/carbon/sushilki/modal-content/programs/control_program.exe"
-                      download
-                    >
-                      Скачать Программу
-                    </a>
-                  </div>
-                </li>
-                {/* Добавьте другие программы по необходимости */}
-              </ul>
-            </AccordionDetails>
-          </Accordion>
+          <DocumentationAccordion items={AccordionItems} />
         </div>
       </CustomModal>
 
       {/* Изображение сушилки */}
-      <img src="/assets/img/sushilka.jpg" alt="Сушилка" className={styles.mnemo__img}/>
+      <img src="/assets/img/sushilka.jpg" alt="Сушилка" className={styles.mnemo__img} />
 
       {/* Текстовые подписи */}
       <div className={`${styles.mnemo__paramDescr} ${styles.kameraText}`}>
@@ -202,201 +109,112 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title }: Mne
       </div>
 
       {/* Параметры - каждый в отдельном блоке */}
-      <Tippy
-        className="tippy-box"
-        content={
-          <div className="mnemo__param-clue-content">
-          Прибор: Термопара (1000мм)<br />
-          Диапазон: -40...+1000&#176;C<br />
-          Градуировка: ХА (К)
-        </div>
-        }
-        placement="top"
-        theme="custom"
-        animation="scale"
-        disabled={!tooltipsEnabled} // Отключение тултипа, если tooltipsEnabled = false
+      <Tooltip
+        tooltipId="temperaturaTopki"
+        content={getTooltipContent("temperaturaTopki")}
+        disabled={!tooltipsEnabled}
       >
         <div
           className={`${styles.mnemo__param} ${styles.topka_temper} ${
-            isHovered ? styles.enabledHover : ""
+            tooltipsEnabled ? styles.enabledHover : ""
           }`}
-          onMouseEnter={() => {
-            if (tooltipsEnabled) setIsHovered(true); // Наведение только если тултипы включены
-          }}
-          onMouseLeave={() => {
-            if (tooltipsEnabled) setIsHovered(false); // Уход мыши только если тултипы включены
-          }}
         >
           <span className={styles["mnemo__param-text"]}>
             {data.temperatures["Температура в топке"] || "-"} °C
           </span>
         </div>
-      </Tippy>
+      </Tooltip>
 
-      <Tippy
-        className="tippy-box"
-        content={
-          <div className="mnemo__param-clue-content">
-          Прибор: Термопара (1000мм)<br />
-          Диапазон: -40...+1000&#176;C<br />
-          Градуировка: ХА (К)
-        </div>
-        }
-        placement="top"
-        theme="custom"
-        animation="scale"
-        disabled={!tooltipsEnabled} // Отключение тултипа, если tooltipsEnabled = false
+      <Tooltip
+        tooltipId="temperaturaKameraSmeshenia"
+        content={getTooltipContent("temperaturaKameraSmeshenia")}
+        disabled={!tooltipsEnabled}
       >
         <div
           className={`${styles.mnemo__param} ${styles.kamera_smeshenia} ${
-            isHovered ? styles.enabledHover : ""
+            tooltipsEnabled ? styles.enabledHover : ""
           }`}
-          onMouseEnter={() => {
-            if (tooltipsEnabled) setIsHovered(true); // Наведение только если тултипы включены
-          }}
-          onMouseLeave={() => {
-            if (tooltipsEnabled) setIsHovered(false); // Уход мыши только если тултипы включены
-          }}
         >
           <span className={styles["mnemo__param-text"]}>
             {data.temperatures["Температура в камере смешения"] || "-"} °C
           </span>
         </div>
-      </Tippy>
+      </Tooltip>
 
-      <Tippy
-        className="tippy-box"
-        content={
-          <div className="mnemo__param-clue-content">
-          Прибор: Термопара (1000мм)<br />
-          Диапазон: -40...+1000&#176;C<br />
-          Градуировка: ХА (К)
-        </div>
-        }
-        placement="top"
-        theme="custom"
-        animation="scale"
-        disabled={!tooltipsEnabled} // Отключение тултипа, если tooltipsEnabled = false
+      <Tooltip
+        tooltipId="temperaturaUhodGazov"
+        content={getTooltipContent("temperaturaUhodGazov")}
+        disabled={!tooltipsEnabled}
       >
         <div
           className={`${styles.mnemo__param} ${styles.uhod_gazov} ${
-            isHovered ? styles.enabledHover : ""
+            tooltipsEnabled ? styles.enabledHover : ""
           }`}
-          onMouseEnter={() => {
-            if (tooltipsEnabled) setIsHovered(true); // Наведение только если тултипы включены
-          }}
-          onMouseLeave={() => {
-            if (tooltipsEnabled) setIsHovered(false); // Уход мыши только если тултипы включены
-          }}
         >
           <span className={styles["mnemo__param-text"]}>
             {data.temperatures["Температура уходящих газов"] || "-"} °C
           </span>
         </div>
-      </Tippy>
+      </Tooltip>
 
-      <Tippy
-        className="tippy-box"
-        content={
-          <div className="mnemo__param-clue-content">
-          Прибор: ПД-1.ТН1<br />
-          Диапазон: -0,125...+0,125 кПа<br />
-          Токовый выход: 4-20 мА
-        </div>
-        }
-        placement="top"
-        theme="custom"
-        animation="scale"
-        disabled={!tooltipsEnabled} // Отключение тултипа, если tooltipsEnabled = false
+      <Tooltip
+        tooltipId="davlenieTopki"
+        content={getTooltipContent("davlenieTopki")}
+        disabled={!tooltipsEnabled}
       >
         <div
           className={`${styles.mnemo__param} ${styles.topka_davl} ${
-            isHovered ? styles.enabledHover : ""
+            tooltipsEnabled ? styles.enabledHover : ""
           }`}
-          onMouseEnter={() => {
-            if (tooltipsEnabled) setIsHovered(true); // Наведение только если тултипы включены
-          }}
-          onMouseLeave={() => {
-            if (tooltipsEnabled) setIsHovered(false); // Уход мыши только если тултипы включены
-          }}
         >
           <span className={styles["mnemo__param-text"]}>
             {data.vacuums["Разрежение в топке"] || "-"} кг/см²
           </span>
         </div>
-      </Tippy>
+      </Tooltip>
 
-      <Tippy
-        className="tippy-box"
-        content={
-          <div className="mnemo__param-clue-content">
-          Прибор: ПД-1.ТН1<br />
-          Диапазон: -0,125...+0,125 кПа<br />
-          Токовый выход: 4-20 мА
-        </div>
-        }
-        placement="top"
-        theme="custom"
-        animation="scale"
-        disabled={!tooltipsEnabled} // Отключение тултипа, если tooltipsEnabled = false
+      <Tooltip
+        tooltipId="davlenieKameraVigruzki"
+        content={getTooltipContent("davlenieKameraVigruzki")}
+        disabled={!tooltipsEnabled}
       >
         <div
           className={`${styles.mnemo__param} ${styles.kamera_vigruzki} ${
-            isHovered ? styles.enabledHover : ""
+            tooltipsEnabled ? styles.enabledHover : ""
           }`}
-          onMouseEnter={() => {
-            if (tooltipsEnabled) setIsHovered(true); // Наведение только если тултипы включены
-          }}
-          onMouseLeave={() => {
-            if (tooltipsEnabled) setIsHovered(false); // Уход мыши только если тултипы включены
-          }}
         >
           <span className={styles["mnemo__param-text"]}>
             {data.vacuums["Разрежение в камере выгрузки"] || "-"} кг/см²
           </span>
         </div>
-      </Tippy>
+      </Tooltip>
 
-      <Tippy
-        className="tippy-box"
-        content={
-          <div className="mnemo__param-clue-content">
-          Прибор: ПД-1.ТН1<br />
-          Диапазон: -0,125...+0,125 кПа<br />
-          Токовый выход: 4-20 мА
-        </div>
-        }
-        placement="top"
-        theme="custom"
-        animation="scale"
-        disabled={!tooltipsEnabled} // Отключение тултипа, если tooltipsEnabled = false
+      <Tooltip
+        tooltipId="davlenieVozduhRazbavl"
+        content={getTooltipContent("davlenieVozduhRazbavl")}
+        disabled={!tooltipsEnabled}
       >
         <div
           className={`${styles.mnemo__param} ${styles.vozduh_razbavl} ${
-            isHovered ? styles.enabledHover : ""
+            tooltipsEnabled ? styles.enabledHover : ""
           }`}
-          onMouseEnter={() => {
-            if (tooltipsEnabled) setIsHovered(true); // Наведение только если тултипы включены
-          }}
-          onMouseLeave={() => {
-            if (tooltipsEnabled) setIsHovered(false); // Уход мыши только если тултипы включены
-          }}
         >
           <span className={styles["mnemo__param-text"]}>
             {data.vacuums["Разрежение воздуха на разбавление"] || "-"} кг/см²
           </span>
         </div>
-      </Tippy>
+      </Tooltip>
 
+      {/* Параметры без тултипов */}
       <div className={`${styles.mnemo__param} ${styles.mosh_gorelki}`}>
         <span className={styles["mnemo__param-text"]}>
-            {data.gorelka["Мощность горелки №1"] || "-"} %
+          {data.gorelka["Мощность горелки №1"] || "-"} %
         </span>
       </div>
 
       <div className={`${styles.mnemo__param} ${styles.zadanie_temper}`}>
         <span className={styles["mnemo__param-text"]}>
-            {data.gorelka["Задание температуры №1"] || "-"} %
+          {data.gorelka["Задание температуры №1"] || "-"} %
         </span>
       </div>
     </div>
