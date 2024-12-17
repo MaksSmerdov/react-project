@@ -1,0 +1,40 @@
+.modalPaper {
+  padding: 10px;
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+	max-height: 600px;
+  max-width: 780px;
+}
+
+.modalTitle {
+  font-weight: 600 !important;
+	padding-bottom: 10px !important;
+	position: relative;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid gray;
+}
+
+.modalTitleText {
+  flex: 1; /* Центрирование заголовка */
+  text-align: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: -10px !important;
+  right: -15px !important;
+  color: green !important; /* Зеленый цвет иконки */
+  border: 1px solid green !important; /* Зеленая рамка */
+  border-radius: 50% !important; /* Круглая форма */
+  padding: 2px !important; /* Отступ вокруг иконки */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  &:hover {
+    background-color: rgba(0, 128, 0, 0.1) !important; /* Легкий зеленый фон при наведении */
+  }
+}

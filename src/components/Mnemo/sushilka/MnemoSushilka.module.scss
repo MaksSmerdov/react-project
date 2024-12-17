@@ -1,0 +1,250 @@
+@use '../../../styles/mixins' as mixins;
+@use '../../../styles/variables' as vars;
+
+.btnReset {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  outline: none; // Убираем фокус, если нужно
+  appearance: none; // Сбрасываем стили браузера
+}
+
+.list-reset {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+
+.mnemo {
+	position: relative;
+	width: 1616px;
+	margin: 0 auto;
+  background-color: white;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1px;
+    text-align: center;
+    @include mixins.text-style(32px, 32px, 600, vars.$hulk);
+
+    &Span {
+      color: black;
+      @include mixins.text-style(22px, 30px, 600, black);
+    }
+  }
+
+  &__param {
+    padding: 2px;
+    margin: 0;
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+
+    &-text{
+      @include mixins.text-style(16px, 16px, 600, vars.$blue);
+      transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    &-naimenov {
+      @include mixins.text-style(18px, 18px, 600, vars.$blue);
+    }
+
+    &Descr {
+      position: absolute;
+      z-index: 1;
+      text-align: center;
+      @include mixins.text-style(15px, 14px, 600, vars.$hunter-green);
+      
+    }
+
+    &-clue{
+      width: 150px;
+      position: absolute !important;
+      z-index: 1;
+      border-radius: 15px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px, rgba(0, 0, 0, 0.12) 0px 0px 3px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease-in-out;
+
+      &-content {
+        position: relative;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(240, 238, 238);
+        border: 2px solid green;
+        border-radius: 15px;
+      }
+    }
+
+    &Box {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+
+      &Btn {
+        padding: 5px;
+        border: 1px solid green;
+        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        @include mixins.text-style(16px, 23px, 600, vars.$hulk);
+
+        &:hover {
+          color: white;
+          background-color: green;
+        }
+
+        &:active {
+          color: white;
+          background-color: green;
+        }
+      }
+    }
+
+  }
+
+  &__img {
+    width: 1616px;
+    opacity: 1;
+  }
+}
+
+.mnemo__param {
+
+  &.enabledHover {
+    &:hover {
+      background-color: green;
+
+      .mnemo__param-text {
+        color: white;
+      }
+    }
+
+    &:active {
+      box-shadow: 0 0 0 3px white, 0 0 0 6px green;
+
+      .mnemo__param-text {
+        color: white;
+      }
+    }
+  }
+}
+
+.topka {
+  &_temper {
+    top: 36.5%;
+    left: 6%;
+  }
+  &_davl {
+    top: 42%;
+    left: 6%;
+  }
+  &Text {
+    top: 40.5%;
+    left: 20px;
+  }
+}
+
+.kamera {
+  &_smeshenia {
+    top: 49%;
+    left: 20%;
+  }
+  &_vigruzki {
+    top: 49%;
+    right: 22.9%;
+  }
+  &Text {
+    text-align: center;
+    top: 44%;
+    left: 19.1%;
+  }
+  &VigruzkiText {
+    text-align: center;
+    top: 44%;
+    right: 22.8%;
+  }
+
+}
+
+.uhod {
+  &_gazov {
+    top: 22%;
+    right: 21%;
+  }
+  &Text {
+    top: 17%;
+    right: 17%;
+  }
+}
+
+.vozduh {
+  &_razbavl {
+    top: 69%;
+    left: 9.5%;
+  }
+  &Text {
+    text-align: left;
+    top: 69%;
+    left: 20px;
+  }
+}
+
+.mosh {
+  &_gorelki {
+    top: 22%;
+    left: 130px;
+  }
+  &GorelkiText {
+    text-align: left;
+    top: 22%;
+    left: 20px;
+  }
+}
+
+.zadanie {
+  &_temper {
+    top: 29%;
+    left: 130px;
+  }
+  &TemperText {
+    text-align: left;
+    top: 29%;
+    left: 20px;
+  }
+}
+
+.barabanText {
+  top: 50%;
+	right: 50%;
+}
+
+.pluzdhSbrasyvatelText {
+  top: 21%;
+	left: 25%;
+}
+
+.liniyaParotushText {
+  top: 15%;
+	left: 30%;
+}
+
+.dymososText {
+  top: 64%;
+	right: 8%;
+}
+
+.gazText {
+  text-align: left;
+	top: 56%;
+	left: 1%;
+}
