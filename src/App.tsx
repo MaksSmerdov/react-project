@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import CurrentParameterSushilka1 from "./pages/sushilki/currentParam/currentParam-sushilka1";
 import CurrentParameterSushilka2 from "./pages/sushilki/currentParam/currentParam-sushilka2";
 import MnemoSushilka1 from "./pages/sushilki/mnemo/mnemo-sushilka1";
+import MnemoSushilka2 from "./pages/sushilki/mnemo/mnemo-sushilka2";
 
 const App: React.FC = () => {
   return (
@@ -16,9 +17,13 @@ const App: React.FC = () => {
           path="/currentParam-sushilka2"
           element={<CurrentParameterSushilka2 />}
         />
-                <Route
+        <Route
           path="/mnemo-sushilka1"
           element={<MnemoSushilka1 />}
+        />
+        <Route
+          path="/mnemo-sushilka2"
+          element={<MnemoSushilka2 />}
         />
       </Routes>
     </div>

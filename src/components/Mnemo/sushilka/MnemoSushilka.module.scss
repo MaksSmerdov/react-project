@@ -1,22 +1,6 @@
 @use '../../../styles/mixins' as mixins;
 @use '../../../styles/variables' as vars;
 
-.btnReset {
-  background-color: transparent;
-  cursor: pointer;
-  padding: 0;
-  border: none;
-  outline: none; // Убираем фокус, если нужно
-  appearance: none; // Сбрасываем стили браузера
-}
-
-.list-reset {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
-
-
 .mnemo {
 	position: relative;
 	width: 1616px;
@@ -72,7 +56,7 @@
       @include mixins.text-style(18px, 18px, 600, vars.$blue);
     }
 
-    &Descr {
+    &-descr {
       position: absolute;
       z-index: 1;
       text-align: center;
@@ -80,59 +64,107 @@
       
     }
 
-    &-clue{
-      width: 150px;
-      position: absolute !important;
-      z-index: 1;
-      border-radius: 15px;
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px, rgba(0, 0, 0, 0.12) 0px 0px 3px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s ease-in-out;
-
-      &-content {
-        position: relative;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        background-color: rgb(240, 238, 238);
-        border: 2px solid green;
-        border-radius: 15px;
-      }
-    }
-
-    &Box {
-      position: absolute;
-      top: 0px;
-      left: 0;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-
-      &Btn {
-        padding: 5px;
-        border: 1px solid green;
-        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-        @include mixins.text-style(16px, 23px, 600, vars.$hulk);
-
-        &:hover {
-          color: white;
-          background-color: green;
-        }
-
-        &:active {
-          color: white;
-          background-color: green;
-        }
-      }
-    }
-
   }
 
   &__img {
     width: 1616px;
     opacity: 1;
+  }
+}
+
+.mnemo__kranContainer {
+	position: absolute;
+	z-index: 1;
+	top: 16.5%;
+	left: 11.5%;
+}
+
+.mnemo__gif {
+	position: absolute;
+	top: 46%;
+	left: 33%;
+	z-index: 1;
+
+  &-1 {
+    top: 56.6%;
+    left: 12.2%;
+  }
+
+  &-2 {
+    top: 16.5%;
+    left: 95.7%;
+
+    & img {
+    width: 40px;
+    height: 90px;
+    }
+  }
+
+  &-3 {
+    top: 68%;
+    left: 88.1%;
+
+    & img {
+      width: 65px;
+      height: 60px;
+      animation: rotate 1s infinite linear;
+      animation-play-state: paused; /* Изначально анимация приостановлена */
+    }
+  }
+
+  &-4 {
+    top: 74%;
+    left: 11.33%;
+
+    & img {
+      width: 35px;
+      height: 30px;
+      animation: rotate 1s infinite linear;
+      animation-play-state: paused; /* Изначально анимация приостановлена */
+    }
+  }
+
+  &-5 {
+    top: 25%;
+    left: 19%;
+
+    & img {
+      transform: rotate(-65deg);
+    }
+  }
+
+  &-6 {
+    top: 19%;
+    left: 22.5%;
+
+    & img {
+      transform: rotate(-63deg);
+    }
+  }
+
+  &-7 {
+    top: 73%;
+    left: 72.5%;
+  }
+
+  &-8 {
+    top: 18.9%;
+    left: 29%;
+
+    & img {
+      transform: rotate(-63deg);
+    }
+  }
+
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 
@@ -170,7 +202,6 @@
     top: 44%;
     right: 22.8%;
   }
-
 }
 
 .uhod {
@@ -245,3 +276,4 @@
 	top: 56%;
 	left: 1%;
 }
+

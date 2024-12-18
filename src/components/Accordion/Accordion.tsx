@@ -3,7 +3,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Divider, // Импортируем Divider
+  Divider,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./Accordion.module.scss";

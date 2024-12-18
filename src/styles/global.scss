@@ -73,6 +73,12 @@
   font-style: normal;
 }
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 // Defaults for body
 body {
   font-family: "Bitter", sans-serif;
@@ -94,8 +100,6 @@ body {
     border-radius: 20px;
   }
 }
-
-
 
 .list-reset {
   list-style: none;

@@ -1,0 +1,42 @@
+.mnemo {
+  &__kran {
+    position: absolute;
+    z-index: 1;
+
+    &-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: white;
+    }
+  }
+
+  &__triangle1 {
+    width: 0;
+    height: 0;
+    border-top: 17px solid transparent;
+    border-left: 20px solid green;
+    border-bottom: 17px solid transparent;
+  }
+
+  &__triangle2 {
+    width: 0;
+    height: 0;
+    border-top: 17px solid transparent;
+    border-right: 20px solid green;
+    border-bottom: 17px solid transparent;
+  }
+}
+
+.mnemo__kran-img {
+  position: relative;
+}
+
+.mnemo__kran-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 5px;
+  left: 5px;
+}
