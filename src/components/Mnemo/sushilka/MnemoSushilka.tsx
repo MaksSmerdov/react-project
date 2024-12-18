@@ -65,7 +65,11 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryer
         onClose={() => setIsModalOpen(false)}
       >
         <div className="mnemo__modal-window">
-          <DocumentationAccordion items={AccordionItems} />
+          <DocumentationAccordion 
+          items={AccordionItems} 
+          enterTimeout={300}
+          exitTimeout={300}
+          />
         </div>
       </CustomModal>
 

@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Divider,
+  Collapse,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./Accordion.module.scss";
@@ -16,9 +17,15 @@ interface AccordionItem {
 
 interface DocumentationAccordionProps {
   items: AccordionItem[];
+  enterTimeout?: number; // Таймаут для открытия
+  exitTimeout?: number;  // Таймаут для закрытия
 }
 
-const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({ items }) => {
+const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({
+  items,
+  enterTimeout = 300, // Значение по умолчанию
+  exitTimeout = 300,    // Значение по умолчанию
+}) => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
   const handleChange = (panel: string) => (
@@ -43,10 +50,14 @@ const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({ items }
           >
             <strong>{item.title}</strong>
           </AccordionSummary>
-          {expanded === item.id && <Divider />}
-          <AccordionDetails>
-            {item.content}
-          </AccordionDetails>
+          <Collapse
+            in={expanded === item.id}
+            timeout={{ enter: enterTimeout, exit: exitTimeout }} // Раздельные таймауты
+            unmountOnExit
+          >
+            {expanded === item.id && <Divider />}
+            <AccordionDetails>{item.content}</AccordionDetails>
+          </Collapse>
         </Accordion>
       ))}
     </div>
