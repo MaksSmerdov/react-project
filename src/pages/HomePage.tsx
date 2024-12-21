@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import styles from './HomePage.module.scss';
 
 const HomePage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'sushilka-1' | 'sushilka-2' | null>(null); // Добавляем "null" как начальное значение
+  const [activeTab, setActiveTab] = useState<'sushilka-1' | 'sushilka-2' | null>(null);
   const [iframeSrc, setIframeSrc] = useState<string>('');
+  const [iframeError, setIframeError] = useState<string | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   const tabs = [
     { id: 'sushilka-1', label: 'Сушилка-1' },
@@ -28,16 +30,35 @@ const HomePage: React.FC = () => {
     ],
   };
 
+  const adjustIframeHeight = () => {
+    if (iframeRef.current) {
+      try {
+        const iframe = iframeRef.current;
+        const height = iframe.contentWindow?.document.body.scrollHeight || 500; // Установка минимальной высоты
+        iframe.style.height = `${height + 100}px`; // Добавляем отступ
+      } catch (error) {
+        console.error('Ошибка при вычислении высоты iframe:', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (iframeSrc) {
+      setIframeError(null); // Сбрасываем ошибку
+      const timer = setTimeout(() => adjustIframeHeight(), 100);
+      return () => clearTimeout(timer);
+    }
+  }, [iframeSrc]);
+
   return (
     <div className={styles['container']}>
-      {/* Кнопки выбора сушилок */}
       <div className={styles['tab-container']}>
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => {
               setActiveTab(tab.id as 'sushilka-1' | 'sushilka-2');
-              setIframeSrc(subTabs[tab.id as 'sushilka-1' | 'sushilka-2'][1].url); // Автоматически открываем "Мнемосхему"
+              setIframeSrc(subTabs[tab.id as 'sushilka-1' | 'sushilka-2'][1].url);
             }}
             className={`${styles['tab-container__button']} ${
               activeTab === tab.id ? styles['tab-container__button--active'] : ''
@@ -47,15 +68,11 @@ const HomePage: React.FC = () => {
           </button>
         ))}
       </div>
-  
-      {/* Контент активной вкладки */}
+
       <div className={styles['tab-content']}>
         {activeTab && (
           <div className={styles['tab-container-box']}>
-            {/* Заголовок слева */}
             <h2 className={styles['tab-content__title']}>{tabs.find((tab) => tab.id === activeTab)?.label}</h2>
-  
-            {/* Под-кнопки справа */}
             <div className={styles['tab-content__sub-tab-container']}>
               {subTabs[activeTab].map((subTab, index) => (
                 <button
@@ -70,19 +87,22 @@ const HomePage: React.FC = () => {
           </div>
         )}
       </div>
-  
-      {/* Iframe для отображения содержимого */}
+
       {iframeSrc && (
         <div className={styles['iframe-container']}>
           <iframe
+            ref={iframeRef}
             src={iframeSrc}
             title="Content Frame"
-            style={{ width: '100%', height: '1000px', border: 'none' }}
+            style={{ width: '100%', border: 'none', height: '600px' }} // Устанавливаем стандартную высоту
+            onLoad={adjustIframeHeight}
+            onError={() => setIframeError('Ошибка загрузки контента')}
           />
+          {iframeError && <div className={styles['error']}>{iframeError}</div>}
         </div>
       )}
     </div>
-  );  
+  );
 };
 
 export default HomePage;

@@ -70,13 +70,25 @@
     width: 1616px;
     opacity: 1;
   }
+
+  &__buttons {
+    position: relative;
+
+    @media (max-width: 1280px) {
+      top: 100px;
+      left: 300px;
+    }
+  }
+
 }
 
 .mnemo__kranContainer {
+  width: 40px;
+  height: 34px;
 	position: absolute;
 	z-index: 1;
 	top: 7%;
-	left: 11.5%;
+	left: 18%;
 }
 
 .mnemo__gif {
@@ -275,3 +287,141 @@
 	left: 1%;
 }
 
+@media (max-width: 1280px) {
+  .mnemo {
+    width: 976px;
+    position: relative;
+
+    &__img {
+      width: 976px;
+    }
+
+    &__param {
+      &-text {
+        @include mixins.text-style(10px, 10px, 600, vars.$blue);
+      }
+      
+      &-naimenov {
+        @include mixins.text-style(10px, 10px, 600, vars.$blue);
+      }
+
+      &-descr {
+        @include mixins.text-style(10px, 10px, 600, vars.$hunter-green);
+      }
+    }
+
+    &__kranContainer {
+      height: 20px;
+    }
+    
+  }
+
+  .topka {
+    &_temper {
+      top: 36.5%;
+      left: 5%;
+    }
+    &_davl {
+      top: 42%;
+      left: 5%;
+    }
+    &Text {
+      top: 40.5%;
+      left: 0%;
+    }
+  }
+  
+  .kamera {
+    &_smeshenia {
+      top: 44%;
+      left: 20%;
+    }
+    &_vigruzki {
+      top: 44%;
+      right: 23%;
+    }
+    &Text {
+      text-align: center;
+      top: 38%;
+      left: 18.7%;
+    }
+    &VigruzkiText {
+      text-align: center;
+      top: 38%;
+      right: 22.3%;
+    }
+  }
+  
+  .uhod {
+    &_gazov {
+      top: 12%;
+      right: 20%;
+    }
+    &Text {
+      top: 7%;
+      right: 15.5%;
+    }
+  }
+  
+  .vozduh {
+    &_razbavl {
+      top: 64%;
+      left: 10%;
+    }
+    &Text {
+      text-align: left;
+      top: 64%;
+      left: 0%;
+    }
+  }
+  
+  .mosh {
+    &_gorelki {
+      top: 20%;
+      left: 8%;
+    }
+    &GorelkiText {
+      text-align: left;
+      top: 20%;
+      left: 0%;
+    }
+  }
+  
+  .zadanie {
+    &_temper {
+      top: 29%;
+      left: 8%;
+    }
+    &TemperText {
+      text-align: left;
+      top: 29%;
+      left: 0%;
+    }
+  }
+  
+  .barabanText {
+    top: 44%;
+    right: 50%;
+  }
+  
+  .pluzdhSbrasyvatelText {
+    top: 12%;
+    left: 25%;
+  }
+  
+  .liniyaParotushText {
+    top: 6%;
+    left: 30%;
+  }
+  
+  .dymososText {
+    top: 59%;
+    right: 7.8%;
+  }
+  
+  .gazText {
+    text-align: left;
+    top: 50%;
+    left: 0%;
+  }
+}

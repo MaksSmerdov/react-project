@@ -12,13 +12,30 @@ const Kran: React.FC<KranProps> = ({
   status,
   orientation = "vertical", // По умолчанию вертикальный
 }) => {
+  const [dynamicSize, setDynamicSize] = useState(size);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1280) {
+        setDynamicSize({ ...size, height: 20 }); // Изменение высоты при адаптиве
+      } else {
+        setDynamicSize(size); // Возврат к исходным значениям
+      }
+    };
+
+    handleResize(); // Установить начальное значение
+    window.addEventListener("resize", handleResize); // Слушатель изменения размера окна
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [size]);
+
   const [color, setColor] = useState<string>(status ? "green" : "red");
 
   useEffect(() => {
     setColor(status ? "green" : "red");
   }, [status]);
 
-  // Задаем стиль вращения для горизонтальной ориентации
+  // Стиль для ориентации
   const transformStyle =
     orientation === "horizontal" ? { transform: "rotate(90deg)" } : {};
 
@@ -26,19 +43,19 @@ const Kran: React.FC<KranProps> = ({
     <div
       className={styles["mnemo__kran"]}
       style={{
-        ...transformStyle, // Применяем стиль вращения
-        width: size.width,
-        height: size.height,
+        ...transformStyle,
+        width: dynamicSize.width,
+        height: dynamicSize.height,
       }}
     >
       <div className={styles["mnemo__kran-box"]}>
         <div
           className={styles["mnemo__triangle1"]}
-          style={{ borderLeft: `20px solid ${color}` }}
+          style={{ borderLeft: `${dynamicSize.width / 2}px solid ${color}` }}
         ></div>
         <div
           className={styles["mnemo__triangle2"]}
-          style={{ borderRight: `20px solid ${color}` }}
+          style={{ borderRight: `${dynamicSize.width / 2}px solid ${color}` }}
         ></div>
       </div>
     </div>

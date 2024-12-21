@@ -3,8 +3,6 @@
 
   .paramBox {
     position: absolute;
-    top: 0;
-    left: 0;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -40,4 +38,11 @@
     appearance: none;
   }
 
+  @media (max-width: 1280px) {
+    .paramBoxBtn {
+      padding: 3px !important;
+      @include mixins.text-style(12px, 12px, 600, vars.$hulk);
+    }
+    
+  }
 

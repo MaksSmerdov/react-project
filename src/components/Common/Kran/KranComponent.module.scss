@@ -27,3 +27,25 @@
     border-bottom: 17px solid transparent;
   }
 }
+
+@media (max-width: 1280px) {
+  .mnemo {
+    &__kran {
+      &-box {
+        height: 20px; // Высота контейнера
+      }
+    }
+
+    &__triangle1 {
+      border-top: 10px solid transparent;
+      border-left: 10px solid green;
+      border-bottom: 10px solid transparent;
+    }
+
+    &__triangle2 {
+      border-top: 10px solid transparent;
+      border-right: 10px solid green;
+      border-bottom: 10px solid transparent;
+    }
+  }
+}

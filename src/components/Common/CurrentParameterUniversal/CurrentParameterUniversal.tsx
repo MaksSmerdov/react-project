@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Table from "../Table/Table";
 import styles from "./currentParameterUniversal.module.scss";
-import { ApiConfig } from "../../../config/apiConfig";
+import { ApiConfig } from "../../../configs/apiConfigSushilka";
 
 interface CurrentParameterUniversalProps {
   config: ApiConfig;

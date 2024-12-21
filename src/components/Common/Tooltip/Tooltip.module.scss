@@ -38,3 +38,10 @@
     bottom: -10px;
   }
 }
+
+@media (max-width: 1280px) {
+  .tippy-box[data-theme~='custom'] {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}

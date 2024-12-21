@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './MnemoSushilka.module.scss';
-import { apiConfigs } from '../../../config/apiConfig';
+import { apiConfigs } from '../../../configs/apiConfigSushilka';
 import useMnemoDryer from './useMnemoSushilka';
 import CustomModal from '../../Common/Modal/Modal';
 import DocumentationAccordion from '../../Common/Accordion/Accordion';
@@ -46,11 +46,15 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryer
     <div className={styles.mnemoContainer}>
       <Header title={title} />
       <div className={styles.mnemo}>
-        <ControlButtons
-          tooltipsEnabled={tooltipsEnabled}
-          onToggleTooltips={toggleTooltips}
-          onOpenModal={() => setIsModalOpen(true)}
-        />
+        <div className={styles.mnemo__buttons}>
+          <ControlButtons
+            tooltipsEnabled={tooltipsEnabled}
+            onToggleTooltips={toggleTooltips}
+            onOpenModal={() => setIsModalOpen(true)}
+            top="0"
+            left="0"
+          />
+        </div>
 
         <CustomModal open={isModalOpen} title="Список документации" onClose={() => setIsModalOpen(false)}>
           <div className="mnemo__modal-window">
@@ -62,7 +66,7 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryer
 
         <div className={styles.mnemo__kranContainer}>
           <Kran
-            size={{ width: 41, height: 40 }}
+            size={{ width: 40, height: 34 }}
             status={Boolean(data.im?.['Индикация паротушения'])}
             orientation="vertical"
           />
@@ -88,7 +92,15 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryer
         {tooltippedParams.map((param, idx) => {
           const value = data[param.source as keyof typeof data]?.[param.dataKey] ?? '-';
           return (
-            <Tooltip key={idx} tooltipId={param.id} content={getTooltipContent(param.id)} disabled={!tooltipsEnabled}>
+            <Tooltip
+              key={idx}
+              tooltipId={param.id}
+              content={getTooltipContent(param.id)} // Контент тултипа
+              disabled={!tooltipsEnabled} // Включен ли тултип
+              width={param.width} // Базовая ширина
+              responsiveWidth={param.responsiveWidth} // Адаптивная ширина
+              placement="top" // Указываем расположение тултипа
+            >
               <div
                 className={`${styles['mnemo__param']} ${param.className} ${tooltipsEnabled ? styles.enabledHover : ''}`}
               >

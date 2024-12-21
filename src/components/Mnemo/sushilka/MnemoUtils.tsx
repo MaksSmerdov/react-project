@@ -39,13 +39,62 @@ export const staticLabels = [
 ];
 
 export const tooltippedParams = [
-  { id: "temperaturaTopki", className: styles.topka_temper, dataKey: "Температура в топке", source: "temperatures", unit: "°C" },
-  { id: "temperaturaKameraSmeshenia", className: styles.kamera_smeshenia, dataKey: "Температура в камере смешения", source: "temperatures", unit: "°C" },
-  { id: "temperaturaUhodGazov", className: styles.uhod_gazov, dataKey: "Температура уходящих газов", source: "temperatures", unit: "°C" },
-  { id: "davlenieTopki", className: styles.topka_davl, dataKey: "Разрежение в топке", source: "vacuums", unit: "кг/см²" },
-  { id: "davlenieKameraVigruzki", className: styles.kamera_vigruzki, dataKey: "Разрежение в камере выгрузки", source: "vacuums", unit: "кг/см²" },
-  { id: "davlenieVozduhRazbavl", className: styles.vozduh_razbavl, dataKey: "Разрежение воздуха на разбавление", source: "vacuums", unit: "кг/см²" },
+  {
+    id: "temperaturaTopki",
+    className: styles.topka_temper,
+    dataKey: "Температура в топке",
+    source: "temperatures",
+    unit: "°C",
+    width: "225px", // Базовая ширина
+    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+  },
+  {
+    id: "temperaturaKameraSmeshenia",
+    className: styles.kamera_smeshenia,
+    dataKey: "Температура в камере смешения",
+    source: "temperatures",
+    unit: "°C",
+    width: "225px", // Базовая ширина
+    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+  },
+  {
+    id: "temperaturaUhodGazov",
+    className: styles.uhod_gazov,
+    dataKey: "Температура уходящих газов",
+    source: "temperatures",
+    unit: "°C",
+    width: "225px", // Базовая ширина
+    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+  },
+  {
+    id: "davlenieTopki",
+    className: styles.topka_davl,
+    dataKey: "Разрежение в топке",
+    source: "vacuums",
+    unit: "кг/см²",
+    width: "225px", // Базовая ширина
+    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+  },
+  {
+    id: "davlenieKameraVigruzki",
+    className: styles.kamera_vigruzki,
+    dataKey: "Разрежение в камере выгрузки",
+    source: "vacuums",
+    unit: "кг/см²",
+    width: "225px", // Базовая ширина
+    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+  },
+  {
+    id: "davlenieVozduhRazbavl",
+    className: styles.vozduh_razbavl,
+    dataKey: "Разрежение воздуха на разбавление",
+    source: "vacuums",
+    unit: "кг/см²",
+    width: "225px", // Базовая ширина
+    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+  },
 ];
+
 
 export const gorelkaGifs = [
   { src: "/assets/img/fire-gif.gif", className: styles["mnemo__gif-1"] },
