@@ -17,7 +17,7 @@ const Tooltip: React.FC<TooltipProps> = ({ tooltipId, content, children, disable
       content={content}
       placement="top"
       theme="custom"
-      animation="scale"
+      animation="shift-away"
       disabled={disabled}
     >
       {children}

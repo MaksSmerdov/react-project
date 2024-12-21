@@ -27,16 +27,3 @@
     border-bottom: 17px solid transparent;
   }
 }
-
-.mnemo__kran-img {
-  position: relative;
-}
-
-.mnemo__kran-img img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 5px;
-  left: 5px;
-}

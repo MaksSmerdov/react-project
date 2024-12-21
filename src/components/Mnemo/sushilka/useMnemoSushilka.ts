@@ -24,26 +24,34 @@ const useMnemoDryer = <K extends SushilkaKey>({ config, dryerNumber }: Config<K>
       try {
         if (isFirstLoad) setIsLoading(true); // Показываем прелоудер только при первой загрузке
         const response = await fetch(config.apiUrl);
-        if (!response.ok) throw new Error("Ошибка загрузки данных");
+  
+        if (!response.ok) {
+          throw new Error(`Ошибка загрузки данных: ${response.status} ${response.statusText}`);
+        }
+  
         const result = await response.json();
         setData(result);
-      } catch (error) {
-        console.error("Ошибка загрузки данных:", error);
+      } catch (error: any) {
+        if (error.name === "TypeError" && error.message.includes("Failed to fetch")) {
+          console.error("Ошибка: Не удалось подключиться к серверу. Проверьте подключение или URL:", config.apiUrl);
+        } else {
+          console.error("Ошибка загрузки данных:", error.message);
+        }
       } finally {
         if (isFirstLoad) {
           setTimeout(() => {
             setIsFirstLoad(false); // Отключаем первую загрузку
             setIsLoading(false); // Прекращаем показ прелоудера
-          }, 1); // Задержка 1 секунда
+          }, 1); // Задержка 1 мс
         }
       }
     };
-
+  
     fetchData();
-    const interval = setInterval(fetchData, 5000); // Обновление данных без прелоудера
+    const interval = setInterval(fetchData, 5000); // Обновление данных каждые 5 секунд
     return () => clearInterval(interval);
   }, [config.apiUrl, isFirstLoad]);
-
+  
   useEffect(() => {
     const temperature = data.temperatures?.["Температура уходящих газов"];
     const gorelkaPower = data.gorelka?.[`Мощность горелки №${dryerNumber}`];

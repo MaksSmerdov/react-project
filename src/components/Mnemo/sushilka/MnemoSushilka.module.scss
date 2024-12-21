@@ -5,8 +5,8 @@
 	position: relative;
 	width: 1616px;
 	margin: 0 auto;
-  background-color: white;
-
+  margin-top: 10px;
+  
   &__title {
     display: flex;
     flex-direction: column;
@@ -75,24 +75,22 @@
 .mnemo__kranContainer {
 	position: absolute;
 	z-index: 1;
-	top: 16.5%;
+	top: 7%;
 	left: 11.5%;
 }
 
 .mnemo__gif {
 	position: absolute;
-	top: 46%;
-	left: 33%;
 	z-index: 1;
 
   &-1 {
-    top: 56.6%;
+    top: 51.6%;
     left: 12.2%;
   }
 
   &-2 {
-    top: 16.5%;
-    left: 95.7%;
+    top: 7%;
+    left: 95.8%;
 
     & img {
     width: 40px;
@@ -101,7 +99,7 @@
   }
 
   &-3 {
-    top: 68%;
+    top: 64.3%;
     left: 88.1%;
 
     & img {
@@ -113,8 +111,8 @@
   }
 
   &-4 {
-    top: 74%;
-    left: 11.33%;
+    top: 71.2%;
+    left: 11.3%;
 
     & img {
       width: 35px;
@@ -125,7 +123,7 @@
   }
 
   &-5 {
-    top: 25%;
+    top: 16.5%;
     left: 19%;
 
     & img {
@@ -134,7 +132,7 @@
   }
 
   &-6 {
-    top: 19%;
+    top: 9.8%;
     left: 22.5%;
 
     & img {
@@ -143,12 +141,12 @@
   }
 
   &-7 {
-    top: 73%;
+    top: 70%;
     left: 72.5%;
   }
 
   &-8 {
-    top: 18.9%;
+    top: 9.6%;
     left: 29%;
 
     & img {
@@ -179,51 +177,51 @@
   }
   &Text {
     top: 40.5%;
-    left: 20px;
+    left: 1%;
   }
 }
 
 .kamera {
   &_smeshenia {
-    top: 49%;
+    top: 44%;
     left: 20%;
   }
   &_vigruzki {
-    top: 49%;
-    right: 22.9%;
+    top: 44%;
+    right: 23.5%;
   }
   &Text {
     text-align: center;
-    top: 44%;
+    top: 38%;
     left: 19.1%;
   }
   &VigruzkiText {
     text-align: center;
-    top: 44%;
+    top: 38%;
     right: 22.8%;
   }
 }
 
 .uhod {
   &_gazov {
-    top: 22%;
+    top: 13%;
     right: 21%;
   }
   &Text {
-    top: 17%;
-    right: 17%;
+    top: 8%;
+    right: 16.8%;
   }
 }
 
 .vozduh {
   &_razbavl {
-    top: 69%;
-    left: 9.5%;
+    top: 66%;
+    left: 10%;
   }
   &Text {
     text-align: left;
-    top: 69%;
-    left: 20px;
+    top: 66%;
+    left: 1%;
   }
 }
 
@@ -235,7 +233,7 @@
   &GorelkiText {
     text-align: left;
     top: 22%;
-    left: 20px;
+    left: 1%;
   }
 }
 
@@ -247,33 +245,33 @@
   &TemperText {
     text-align: left;
     top: 29%;
-    left: 20px;
+    left: 1%;
   }
 }
 
 .barabanText {
-  top: 50%;
+  top: 44%;
 	right: 50%;
 }
 
 .pluzdhSbrasyvatelText {
-  top: 21%;
+  top: 12%;
 	left: 25%;
 }
 
 .liniyaParotushText {
-  top: 15%;
+  top: 6%;
 	left: 30%;
 }
 
 .dymososText {
-  top: 64%;
+  top: 60%;
 	right: 8%;
 }
 
 .gazText {
   text-align: left;
-	top: 56%;
+	top: 50%;
 	left: 1%;
 }
 

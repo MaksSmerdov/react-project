@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
-  Slide,
+  Zoom,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Modal.module.scss";
@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement<any, any> },
   ref: React.Ref<unknown>
 ) {
-  return <Slide direction="down" ref={ref} {...props} />;
+  return <Zoom ref={ref} {...props} timeout={{ enter: 500, exit: 500 }} />;
 });
 
 interface CustomModalProps {
@@ -29,7 +29,10 @@ const CustomModal: React.FC<CustomModalProps> = ({ open, title, children, onClos
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={(event, reason) => {
+        if (reason === "backdropClick") return; // Игнорируем закрытие на фоне
+        onClose(); // Закрытие при других причинах
+      }}
       TransitionComponent={Transition}
       classes={{ paper: styles.modalPaper }}
     >

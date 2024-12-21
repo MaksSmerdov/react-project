@@ -107,59 +107,62 @@ body {
   margin: 0;
 }
 
-// Стили для ссылок и контейнеров аккордеона
-.modal-content__link {
-  position: relative;
-  margin-right: 30px;
-  @include mixins.text-style(16px, 24px, 400, vars.$black);
-}
+.modal-content {
 
-.modal-content__link-download {
-  padding: 6px 10px;
-  text-decoration: none;
-  border: 2px solid green;
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  @include mixins.text-style(15px, 14px, 500, vars.$hulk);
+  &__link {
+    position: relative;
+    margin-right: 30px;
+    @include mixins.text-style(16px, 24px, 400, vars.$black);
 
-  &:first-child {
-    border-right: none;
+    &-container {
+      display: flex;
+      flex-shrink: 0;
+    
+      &.active {
+        display: none;
+      }
+    }
+
+    &-download {
+      padding: 6px 10px;
+      text-decoration: none;
+      border: 2px solid green;
+      transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      @include mixins.text-style(15px, 14px, 500, vars.$hulk);
+    
+      &:first-child {
+        border-right: none;
+      }
+    
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: vars.$hulk;
+        color: vars.$white;
+      }
+
+      &--one:first-child {
+        border-right: 2px solid green;
+      }
+
+      &-solo {
+        padding: 6px 10px;
+        text-decoration: none;
+        border: 2px solid green;
+        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        @include mixins.text-style(15px, 14px, 500, vars.$hulk);
+      
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: vars.$hulk;
+          color: vars.$white;
+        }
+      }
+    }
   }
-
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: vars.$hulk;
-    color: vars.$white;
-  }
 }
 
-.modal-content__link-download--one:first-child {
-  border-right: 2px solid green;
-}
-
-.modal-content__link-download-solo {
-  padding: 6px 10px;
-  text-decoration: none;
-  border: 2px solid green;
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  @include mixins.text-style(15px, 14px, 500, vars.$hulk);
-
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: vars.$hulk;
-    color: vars.$white;
-  }
-}
-
-.modal-content__link-container {
-  display: flex;
-  flex-shrink: 0;
-
-  &.active {
-    display: none;
-  }
-}
 
 // Стили для аккордеона
 .modal__accordion {

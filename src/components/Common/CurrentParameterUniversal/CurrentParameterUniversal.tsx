@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Table from "../Table/Table";
 import styles from "./currentParameterUniversal.module.scss";
-import { ApiConfig } from "../../config/apiConfig";
+import { ApiConfig } from "../../../config/apiConfig";
 
 interface CurrentParameterUniversalProps {
   config: ApiConfig;
@@ -11,7 +11,6 @@ interface CurrentParameterUniversalProps {
 
 const CurrentParameterUniversal: React.FC<CurrentParameterUniversalProps> = ({ config, title }) => {
   const [data, setData] = useState(config.defaultData);
-  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,14 +29,9 @@ const CurrentParameterUniversal: React.FC<CurrentParameterUniversalProps> = ({ c
     return () => clearInterval(interval);
   }, [config.apiUrl]);
 
-  useEffect(() => {
-    const timeInterval = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timeInterval);
-  }, []);
-
   return (
     <div>
-      <Header title={title} currentTime={currentTime} />
+      <Header title={title} />
       <div className={styles.tables}>
         {Object.entries(config.titles).map(([key, tableTitle]) => (
           <div key={key}>

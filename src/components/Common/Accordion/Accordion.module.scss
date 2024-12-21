@@ -1,8 +1,8 @@
-@use '../../styles/mixins' as mixins;
-@use '../../styles/variables' as vars;
+@use '../../../styles/mixins' as mixins;
+@use '../../../styles/variables' as vars;
 
 .accordionContainer {
-  width: 95%;
+  width: 100%;
   padding-top: 10px;
 
   /* Таргетим глобальные классы Material-UI внутри контейнера */
@@ -18,7 +18,8 @@
   }
 
   :global(.MuiAccordionDetails-root) {
-    padding: 16px;
+    padding: 10px;
+    padding-bottom: 0px;
   }
 
   /* Дополнительно: Изменение тени при наведении и раскрытии */
