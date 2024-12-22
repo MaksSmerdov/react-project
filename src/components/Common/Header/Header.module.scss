@@ -38,3 +38,26 @@
     color: black;
   }
 }
+
+@media (max-width: 1280px) {
+  .header {
+    &__title {
+      font-size: 18px;
+      line-height: 22px;
+      font-weight: 700;
+  
+      &Span {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 600;
+      }
+    }
+
+    &__date,
+    &__time {
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 600;
+    }
+  }
+}

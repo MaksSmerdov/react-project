@@ -5,12 +5,12 @@ type SushilkaKey = keyof typeof apiConfigs;
 
 interface Config<K extends SushilkaKey> {
   config: typeof apiConfigs[K];
-  dryerNumber: number;
+  objectNumber: number;
 }
 
 type Data<K extends SushilkaKey> = typeof apiConfigs[K]["defaultData"];
 
-const useMnemoDryer = <K extends SushilkaKey>({ config, dryerNumber }: Config<K>) => {
+const useMnemoSushilka = <K extends SushilkaKey>({ config, objectNumber }: Config<K>) => {
   const [data, setData] = useState<Data<K>>(config.defaultData);
   const [tooltipsEnabled, setTooltipsEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,12 +51,12 @@ const useMnemoDryer = <K extends SushilkaKey>({ config, dryerNumber }: Config<K>
   useEffect(() => {
     const { temperatures, gorelka } = data;
     const temperature = temperatures?.["Температура уходящих газов"];
-    const gorelkaPower = gorelka?.[`Мощность горелки №${dryerNumber}`];
+    const gorelkaPower = gorelka?.[`Мощность горелки №${objectNumber}`];
 
     setAnimationsRunning(!!(typeof temperature === "number" && temperature > 30));
     setIsGif2Visible(!!(typeof temperature === "number" && temperature > 30));
     setIsGorelkaGifsVisible(!!(typeof gorelkaPower === "number" && gorelkaPower > 5));
-  }, [data, dryerNumber]);
+  }, [data, objectNumber]);
 
   const toggleTooltips = () => setTooltipsEnabled((prev) => !prev);
 
@@ -71,4 +71,4 @@ const useMnemoDryer = <K extends SushilkaKey>({ config, dryerNumber }: Config<K>
   };
 };
 
-export default useMnemoDryer;
+export default useMnemoSushilka;

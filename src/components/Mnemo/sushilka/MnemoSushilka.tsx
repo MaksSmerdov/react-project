@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './MnemoSushilka.module.scss';
 import { apiConfigs } from '../../../configs/apiConfigSushilka';
-import useMnemoDryer from './useMnemoSushilka';
+import useMnemoSushilka from './useMnemoSushilka';
 import CustomModal from '../../Common/Modal/Modal';
 import DocumentationAccordion from '../../Common/Accordion/Accordion';
-import { AccordionItems } from './AccordionItems';
+import { accordionData } from './AccordionItems';
 import Tooltip from '../../Common/Tooltip/Tooltip';
 import Kran from '../../Common/Kran/KranComponent';
 import Loader from '../../Common/Preloader/Preloader';
@@ -12,15 +12,19 @@ import ControlButtons from '../../Common/ControlButtons/ControlButtons';
 import { staticLabels, tooltippedParams, gorelkaGifs, getTooltipContent, renderGIF } from './MnemoUtils';
 import Header from '../../Common/Header/Header';
 
-interface MnemoDryerProps<K extends keyof typeof apiConfigs> {
+interface MnemoSushilkaProps<K extends keyof typeof apiConfigs> {
   configKey: K;
   title: string;
-  dryerNumber: number;
+  objectNumber: number;
 }
 
-const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryerNumber }: MnemoDryerProps<K>) => {
+const MnemoSushilka = <K extends keyof typeof apiConfigs>({
+  configKey,
+  title,
+  objectNumber,
+}: MnemoSushilkaProps<K>) => {
   const { data, isLoading, tooltipsEnabled, toggleTooltips, animationsRunning, isGif2Visible, isGorelkaGifsVisible } =
-    useMnemoDryer({ config: apiConfigs[configKey], dryerNumber });
+    useMnemoSushilka({ config: apiConfigs[configKey], objectNumber });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,12 +32,12 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryer
   const nonTooltippedParams = [
     {
       className: styles.mosh_gorelki,
-      value: data.gorelka?.[`Мощность горелки №${dryerNumber}`] ?? '-',
+      value: data.gorelka?.[`Мощность горелки №${objectNumber}`] ?? '-',
       unit: '%',
     },
     {
       className: styles.zadanie_temper,
-      value: data.gorelka?.[`Задание температуры №${dryerNumber}`] ?? '-',
+      value: data.gorelka?.[`Задание температуры №${objectNumber}`] ?? '-',
       unit: '%',
     },
   ];
@@ -46,31 +50,31 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryer
     <div className={styles.mnemoContainer}>
       <Header title={title} />
       <div className={styles.mnemo}>
-        <div className={styles.mnemo__buttons}>
-          <ControlButtons
-            tooltipsEnabled={tooltipsEnabled}
-            onToggleTooltips={toggleTooltips}
-            onOpenModal={() => setIsModalOpen(true)}
-            top="0"
-            left="0"
-          />
-        </div>
+        <ControlButtons
+          tooltipsEnabled={tooltipsEnabled}
+          onToggleTooltips={toggleTooltips}
+          onOpenModal={() => setIsModalOpen(true)}
+          top="0"
+          left="0"
+          adaptiveTop="100px"
+          adaptiveLeft="300px"
+        />
 
         <CustomModal open={isModalOpen} title="Список документации" onClose={() => setIsModalOpen(false)}>
-          <div className="mnemo__modal-window">
-            <DocumentationAccordion items={AccordionItems} enterTimeout={300} exitTimeout={300} />
-          </div>
+          <DocumentationAccordion accordionData={accordionData} enterTimeout={300} exitTimeout={300} />
         </CustomModal>
 
         <img src="/assets/img/sushilka.jpg" alt="Сушилка" className={styles['mnemo__img']} />
 
-        <div className={styles.mnemo__kranContainer}>
-          <Kran
-            size={{ width: 40, height: 34 }}
-            status={Boolean(data.im?.['Индикация паротушения'])}
-            orientation="vertical"
-          />
-        </div>
+        <Kran
+          size={{ width: 40, height: 34 }}
+          status={Boolean(data.im?.['Индикация паротушения'])}
+          orientation="vertical"
+          top="40px"
+          left="300px"
+          adaptiveTop="25px"
+          adaptiveLeft="180px"
+        />
 
         {isGif2Visible && renderGIF('/assets/img/par.gif', styles['mnemo__gif-2'], animationsRunning, false)}
         {renderGIF('/assets/img/ventilator.png', styles['mnemo__gif-3'], animationsRunning)}
@@ -125,4 +129,4 @@ const MnemoDryer = <K extends keyof typeof apiConfigs>({ configKey, title, dryer
   );
 };
 
-export default MnemoDryer;
+export default MnemoSushilka;

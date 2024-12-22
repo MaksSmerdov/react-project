@@ -4,8 +4,8 @@
 @font-face {
   font-family: "Bitter";
   font-display: swap;
-  src: url("../assets/fonts/Bitter-SemiBold.woff2") format("woff2"),
-       url("../assets/fonts/Bitter-SemiBold.woff") format("woff");
+  src: url("../../public/assets/fonts/Bitter-SemiBold.woff2") format("woff2"),
+       url("../../public/assets/fonts/Bitter-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
@@ -13,8 +13,8 @@
 @font-face {
   font-family: "Bitter";
   font-display: swap;
-  src: url("../assets/fonts/Bitter-Regular.woff2") format("woff2"),
-       url("../assets/fonts/Bitter-Regular.woff") format("woff");
+  src: url("../../public/assets/fonts/Bitter-Regular.woff2") format("woff2"),
+       url("../../public/assets/fonts/Bitter-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -22,8 +22,8 @@
 @font-face {
   font-family: "Bitter";
   font-display: swap;
-  src: url("../assets/fonts/Bitter-Medium.woff2") format("woff2"),
-       url("../assets/fonts/Bitter-Medium.woff") format("woff");
+  src: url("../../public/assets/fonts/Bitter-Medium.woff2") format("woff2"),
+       url("../../public/assets/fonts/Bitter-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
@@ -31,8 +31,8 @@
 @font-face {
   font-family: "Gilroy";
   font-display: swap;
-  src: url("../assets/fonts/Gilroy-Bold.woff2") format("woff2"),
-       url("../assets/fonts/Gilroy-Bold.woff") format("woff");
+  src: url("../../public/assets/fonts/Gilroy-Bold.woff2") format("woff2"),
+       url("../../public/assets/fonts/Gilroy-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
@@ -40,7 +40,7 @@
 @font-face {
   font-family: "Gilroy";
   font-display: swap;
-  src: url("../assets/fonts/Gilroy-Medium.woff2") format("woff2"),
+  src: url("../../public/assets/fonts/Gilroy-Medium.woff2") format("woff2"),
        url("../assets/fonts/Gilroy-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
@@ -49,8 +49,8 @@
 @font-face {
   font-family: "Gilroy";
   font-display: swap;
-  src: url("../assets/fonts/Gilroy-Regular.woff2") format("woff2"),
-       url("../assets/fonts/Gilroy-Regular.woff") format("woff");
+  src: url("../../public/assets/fonts/Gilroy-Regular.woff2") format("woff2"),
+       url("../../public/assets/fonts/Gilroy-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -58,8 +58,8 @@
 @font-face {
   font-family: "Oswald";
   font-display: swap;
-  src: url("../assets/fonts/Oswald-SemiBold.woff2") format("woff2"),
-       url("../assets/fonts/Oswald-SemiBold.woff") format("woff");
+  src: url("../../public/assets/fonts/Oswald-SemiBold.woff2") format("woff2"),
+       url("../../public/assets/fonts/Oswald-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
@@ -67,8 +67,8 @@
 @font-face {
   font-family: "Oswald";
   font-display: swap;
-  src: url("../assets/fonts/Oswald-Regular.woff2") format("woff2"),
-       url("../assets/fonts/Oswald-Regular.woff") format("woff");
+  src: url("../../public/assets/fonts/Oswald-Regular.woff2") format("woff2"),
+       url("../../public/assets/fonts/Oswald-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -79,6 +79,20 @@
 	box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #dfdcdc;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: green;
+  border-radius: 20px;
+}
+
 // Defaults for body
 body {
   font-family: "Bitter", sans-serif;
@@ -86,126 +100,4 @@ body {
   color: #333;
   background-color: white;
   
-  &::-webkit-scrollbar {
-    width: 3px;
-    height: 3px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: #dfdcdc;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: green;
-    border-radius: 20px;
-  }
-}
-
-.list-reset {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.modal-content {
-
-  &__link {
-    position: relative;
-    margin-right: 30px;
-    @include mixins.text-style(16px, 24px, 400, vars.$black);
-
-    &-container {
-      display: flex;
-      flex-shrink: 0;
-    
-      &.active {
-        display: none;
-      }
-    }
-
-    &-download {
-      padding: 6px 10px;
-      text-decoration: none;
-      border: 2px solid green;
-      transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-      @include mixins.text-style(15px, 14px, 500, vars.$hulk);
-    
-      &:first-child {
-        border-right: none;
-      }
-    
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: vars.$hulk;
-        color: vars.$white;
-      }
-
-      &--one:first-child {
-        border-right: 2px solid green;
-      }
-
-      &-solo {
-        padding: 6px 10px;
-        text-decoration: none;
-        border: 2px solid green;
-        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-        @include mixins.text-style(15px, 14px, 500, vars.$hulk);
-      
-        &:hover,
-        &:active,
-        &:focus {
-          background-color: vars.$hulk;
-          color: vars.$white;
-        }
-      }
-    }
-  }
-}
-
-
-// Стили для аккордеона
-.modal__accordion {
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.modal__accordion-title {
-  display: block;
-  padding: 3px;
-  cursor: pointer;
-  background-color: white;
-  border: 1px solid green;
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  @include mixins.text-style(20px, 24px, 600, vars.$hulk);
-
-  &:hover,
-  &:active,
-  &.enabled {
-    color: vars.$white;
-    background-color: green;
-  }
-}
-
-.modal__accordion-content {
-  margin: 0;
-  padding: 0;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-right: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  max-height: 0;
-  list-style-type: none;
-  transition: max-height 0.3s ease-in-out;
-  overflow: hidden;
-  @include mixins.text-style(30px, 36px, 500, null);
-}
-
-.modal__accordion-content-item {
-  margin-bottom: 23px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }

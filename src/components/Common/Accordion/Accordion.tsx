@@ -16,17 +16,45 @@ interface AccordionItem {
 }
 
 interface DocumentationAccordionProps {
-  items: AccordionItem[];
-  enterTimeout?: number; // Таймаут для открытия
-  exitTimeout?: number;  // Таймаут для закрытия
+  accordionData: { [key: string]: { name: string; files: { type: string; href: string; }[] }[] };
+  enterTimeout?: number;
+  exitTimeout?: number;
 }
 
 const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({
-  items,
-  enterTimeout = 300, // Значение по умолчанию
-  exitTimeout = 300,    // Значение по умолчанию
+  accordionData,
+  enterTimeout = 300,
+  exitTimeout = 300,
 }) => {
   const [expanded, setExpanded] = useState<string | false>(false);
+
+  const accordionItems: AccordionItem[] = Object.entries(accordionData).map(
+    ([key, items]) => ({
+      id: key,
+      title: key === "schemes" ? "Схемы объекта" : "Программы",
+      content: (
+        <ul className={styles['list-reset']}>
+          {items.map((item, index) => (
+            <li className={styles['accordion-item']} key={index}>
+              <div className={styles['accordion-link']}>{item.name}</div>
+              <div className={styles['accordion-link-container']}>
+                {item.files.map((file, fileIndex) => (
+                  <a
+                    className={styles['accordion-link-download']}
+                    href={file.href}
+                    key={fileIndex}
+                    download
+                  >
+                    Скачать {file.type}
+                  </a>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      ),
+    })
+  );
 
   const handleChange = (panel: string) => (
     event: React.SyntheticEvent,
@@ -37,7 +65,7 @@ const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({
 
   return (
     <div className={styles.accordionContainer}>
-      {items.map((item) => (
+      {accordionItems.map((item) => (
         <Accordion
           key={item.id}
           expanded={expanded === item.id}
@@ -47,16 +75,19 @@ const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`${item.id}-content`}
             id={`${item.id}-header`}
+            className={styles.accordionSummary} // Добавьте класс для стилей
           >
             <strong>{item.title}</strong>
           </AccordionSummary>
           <Collapse
             in={expanded === item.id}
-            timeout={{ enter: enterTimeout, exit: exitTimeout }} // Раздельные таймауты
+            timeout={{ enter: enterTimeout, exit: exitTimeout }}
             unmountOnExit
           >
             {expanded === item.id && <Divider />}
-            <AccordionDetails>{item.content}</AccordionDetails>
+            <AccordionDetails className={styles.accordionDetails}>
+              {item.content}
+            </AccordionDetails>
           </Collapse>
         </Accordion>
       ))}

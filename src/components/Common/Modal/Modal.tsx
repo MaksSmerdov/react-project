@@ -44,7 +44,9 @@ const CustomModal: React.FC<CustomModalProps> = ({ open, title, children, onClos
           className={styles.closeButton}
           size="small"
         >
-          <CloseIcon />
+          <CloseIcon 
+          className={styles.closeKrest}
+          />
         </IconButton>
       </DialogTitle>
       <DialogContent>{children}</DialogContent>

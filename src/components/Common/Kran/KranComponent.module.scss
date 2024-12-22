@@ -32,19 +32,20 @@
   .mnemo {
     &__kran {
       &-box {
-        height: 20px; // Высота контейнера
+        width: 20px !important;
+        height: 20px !important; // Высота контейнера
       }
     }
 
     &__triangle1 {
       border-top: 10px solid transparent;
-      border-left: 10px solid green;
+      border-left: 12px solid green !important;
       border-bottom: 10px solid transparent;
     }
 
     &__triangle2 {
       border-top: 10px solid transparent;
-      border-right: 10px solid green;
+      border-right: 12px solid green !important;
       border-bottom: 10px solid transparent;
     }
   }

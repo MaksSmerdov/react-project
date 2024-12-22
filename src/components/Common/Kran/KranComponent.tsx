@@ -5,21 +5,32 @@ interface KranProps {
   size?: { width: number; height: number };
   status: boolean; // true для зеленого, false для красного
   orientation?: "horizontal" | "vertical"; // Ориентация крана
+  top?: string; // Положение сверху для обычного экрана
+  left?: string; // Положение слева для обычного экрана
+  adaptiveTop?: string; // Положение сверху для адаптивного экрана
+  adaptiveLeft?: string; // Положение слева для адаптивного экрана
 }
 
 const Kran: React.FC<KranProps> = ({
   size = { width: 40, height: 34 },
   status,
   orientation = "vertical", // По умолчанию вертикальный
+  top = "0px",
+  left = "0px",
+  adaptiveTop = "50px",
+  adaptiveLeft = "20px",
 }) => {
   const [dynamicSize, setDynamicSize] = useState(size);
+  const [position, setPosition] = useState({ top, left });
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 1280) {
-        setDynamicSize({ ...size, height: 20 }); // Изменение высоты при адаптиве
+        setDynamicSize({ width: 20, height: 20 }); // Изменение высоты и ширины при адаптиве
+        setPosition({ top: adaptiveTop, left: adaptiveLeft }); // Устанавливаем адаптивные позиции
       } else {
         setDynamicSize(size); // Возврат к исходным значениям
+        setPosition({ top, left }); // Возврат к исходным позициям
       }
     };
 
@@ -27,7 +38,7 @@ const Kran: React.FC<KranProps> = ({
     window.addEventListener("resize", handleResize); // Слушатель изменения размера окна
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [size]);
+  }, [size, top, left, adaptiveTop, adaptiveLeft]);
 
   const [color, setColor] = useState<string>(status ? "green" : "red");
 
@@ -46,6 +57,9 @@ const Kran: React.FC<KranProps> = ({
         ...transformStyle,
         width: dynamicSize.width,
         height: dynamicSize.height,
+        position: "absolute", // Убедитесь, что элемент позиционируется правильно
+        top: position.top,
+        left: position.left,
       }}
     >
       <div className={styles["mnemo__kran-box"]}>

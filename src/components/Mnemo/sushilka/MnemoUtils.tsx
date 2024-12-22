@@ -46,7 +46,7 @@ export const tooltippedParams = [
     source: "temperatures",
     unit: "°C",
     width: "225px", // Базовая ширина
-    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+    responsiveWidth: { "max-1280": "160px" }, // Адаптивная ширина
   },
   {
     id: "temperaturaKameraSmeshenia",
@@ -55,7 +55,7 @@ export const tooltippedParams = [
     source: "temperatures",
     unit: "°C",
     width: "225px", // Базовая ширина
-    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+    responsiveWidth: { "max-1280": "160px" }, // Адаптивная ширина
   },
   {
     id: "temperaturaUhodGazov",
@@ -64,7 +64,7 @@ export const tooltippedParams = [
     source: "temperatures",
     unit: "°C",
     width: "225px", // Базовая ширина
-    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+    responsiveWidth: { "max-1280": "160px" }, // Адаптивная ширина
   },
   {
     id: "davlenieTopki",
@@ -73,7 +73,7 @@ export const tooltippedParams = [
     source: "vacuums",
     unit: "кг/см²",
     width: "225px", // Базовая ширина
-    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+    responsiveWidth: { "max-1280": "160px" }, // Адаптивная ширина
   },
   {
     id: "davlenieKameraVigruzki",
@@ -82,7 +82,7 @@ export const tooltippedParams = [
     source: "vacuums",
     unit: "кг/см²",
     width: "225px", // Базовая ширина
-    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+    responsiveWidth: { "max-1280": "160px" }, // Адаптивная ширина
   },
   {
     id: "davlenieVozduhRazbavl",
@@ -91,7 +91,7 @@ export const tooltippedParams = [
     source: "vacuums",
     unit: "кг/см²",
     width: "225px", // Базовая ширина
-    responsiveWidth: { "max-1280": "200px" }, // Адаптивная ширина
+    responsiveWidth: { "max-1280": "160px" }, // Адаптивная ширина
   },
 ];
 
