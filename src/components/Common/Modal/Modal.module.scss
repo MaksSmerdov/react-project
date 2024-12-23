@@ -1,71 +1,81 @@
 .modalPaper {
-  padding: 10px !important;
-  padding-bottom: 1px !important;
-  border-radius: 8px !important;
-  height: 100%;
+  background-color: #fff;
+  padding: 5px 20px 10px 20px;
+  border-radius: 8px;
+  max-height: 90vh; /* Ограничиваем максимальную высоту */
+  max-width: 650px;
   width: 100%;
-	max-height: 500px !important;
-  max-width: 650px !important;
-  overflow-y: auto; /* Включение прокрутки, если содержимое превышает экран */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Для разделения header и body */
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out; /* Анимация изменения высоты */
+  
+  &AfterOpen {
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &BeforeClose {
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
+  }
 }
 
-.modalTitle {
-  font-weight: 600 !important;
-	padding-bottom: 10px !important;
-	position: relative;
-	display: flex !important;
-	align-items: center;
-	justify-content: center;
-	border-bottom: 1px solid gray;
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный чёрный фон */
+  transition: opacity 0.5s ease; /* Анимация появления */
+  opacity: 0; /* Начальное состояние */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Убедитесь, что модалка сверху */
+}
 
-  &Text {
-    flex: 1; /* Центрирование заголовка */
+.modalOverlayAfterOpen {
+  opacity: 1; /* Полностью видимый фон */
+}
+
+.modalOverlayBeforeClose {
+  opacity: 0; /* Скрытие перед закрытием */
+}
+
+.modalHeader {
+  height: 50px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  position: relative; /* Для позиционирования кнопки закрытия */
+
+  .modalTitle {
+    font-size: 24px;
+    font-weight: 600;
     text-align: center;
+    flex: 1; /* Заголовок занимает всё доступное пространство */
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 5px; /* Располагаем кнопку по вертикали относительно контейнера */
+    right: 0px; /* Отступ от правого края */
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: green;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 128, 0, 0.1);
+      border-radius: 50%;
+    }
   }
 }
 
-.closeButton {
-  position: absolute;
-  top: -10px !important;
-  right: -15px !important;
-  color: green !important; /* Зеленый цвет иконки */
-  border: 1px solid green !important; /* Зеленая рамка */
-  border-radius: 50% !important; /* Круглая форма */
-  padding: 2px !important; /* Отступ вокруг иконки */
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  &:hover {
-    background-color: rgba(0, 128, 0, 0.1) !important; /* Легкий зеленый фон при наведении */
-  }
-}
-
-@media (max-width: 1280px) {
-  .modal {
-    &Paper {
-      padding-top: 0 !important;
-      max-height: 350px !important;
-      max-width: 400px !important;
-    }
-    &Title {
-      padding-bottom: 4px !important;
-
-      &Text {
-        font-size: 16px !important;
-      }
-    }
-  }
-  .close {
-    &Button {
-      top: -15px !important;
-      right: -25px !important;
-      width: 20px;
-      height: 20px;
-    }
-    &Krest {
-      width: 15px !important;
-      height: 15px !important;
-    }
-  }
+.modalContent {
+  flex: 1; /* Контент занимает всё оставшееся место */
+  overflow-y: auto; /* Прокрутка при переполнении */
 }

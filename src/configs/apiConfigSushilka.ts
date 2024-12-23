@@ -7,7 +7,7 @@ export interface ApiConfig {
 
 export const apiConfigs: Record<string, ApiConfig> = {
   sushilka1: {
-    apiUrl: "http://169.254.6.19:3002/api/sushilka1-data",
+    apiUrl: "http://localhost:3002/api/sushilka1-data",
     defaultData: {
       temperatures: {
         "Температура в топке": "—",
@@ -51,7 +51,7 @@ export const apiConfigs: Record<string, ApiConfig> = {
 
 
   sushilka2: {
-    apiUrl: "http://169.254.6.19:3002/api/sushilka2-data",
+    apiUrl: "http://localhost:3002/api/sushilka2-data",
     defaultData: {
       temperatures: {
         "Температура в топке": "—",

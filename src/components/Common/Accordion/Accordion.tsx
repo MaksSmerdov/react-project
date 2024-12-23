@@ -3,8 +3,6 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Divider,
-  Collapse,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styles from "./Accordion.module.scss";
@@ -23,8 +21,6 @@ interface DocumentationAccordionProps {
 
 const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({
   accordionData,
-  enterTimeout = 300,
-  exitTimeout = 300,
 }) => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -67,29 +63,22 @@ const DocumentationAccordion: React.FC<DocumentationAccordionProps> = ({
     <div className={styles.accordionContainer}>
       {accordionItems.map((item) => (
         <Accordion
-          key={item.id}
-          expanded={expanded === item.id}
-          onChange={handleChange(item.id)}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`${item.id}-content`}
-            id={`${item.id}-header`}
-            className={styles.accordionSummary} // Добавьте класс для стилей
-          >
-            <strong>{item.title}</strong>
-          </AccordionSummary>
-          <Collapse
-            in={expanded === item.id}
-            timeout={{ enter: enterTimeout, exit: exitTimeout }}
-            unmountOnExit
-          >
-            {expanded === item.id && <Divider />}
-            <AccordionDetails className={styles.accordionDetails}>
-              {item.content}
-            </AccordionDetails>
-          </Collapse>
-        </Accordion>
+  key={item.id}
+  expanded={expanded === item.id}
+  onChange={handleChange(item.id)}
+>
+  <AccordionSummary
+    expandIcon={<ExpandMoreIcon />}
+    aria-controls={`${item.id}-content`}
+    id={`${item.id}-header`}
+    className={styles.accordionSummary}
+  >
+    <strong>{item.title}</strong>
+  </AccordionSummary>
+  <AccordionDetails className={styles.accordionDetails}>
+    {item.content}
+  </AccordionDetails>
+</Accordion>
       ))}
     </div>
   );

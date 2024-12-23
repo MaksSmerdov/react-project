@@ -60,7 +60,7 @@ const MnemoSushilka = <K extends keyof typeof apiConfigs>({
           adaptiveLeft="300px"
         />
 
-        <CustomModal open={isModalOpen} title="Список документации" onClose={() => setIsModalOpen(false)}>
+        <CustomModal isOpen={isModalOpen} title="Список документации" onClose={() => setIsModalOpen(false)}>
           <DocumentationAccordion accordionData={accordionData} enterTimeout={300} exitTimeout={300} />
         </CustomModal>
 

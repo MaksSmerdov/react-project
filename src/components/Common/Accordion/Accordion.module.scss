@@ -9,8 +9,7 @@
   /* Таргетим глобальные классы Material-UI внутри контейнера */
   :global(.MuiAccordion-root) {
     margin-bottom: 10px;
-    transition: margin-bottom 0.3s ease; // Плавный переход при изменении отступа
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); // Добавление тени
+    transition: margin-bottom 0.5s ease; // Плавный переход при изменении отступа
     border-radius: 8px; // Скругление углов
   }
 
@@ -25,11 +24,11 @@
 
   /* Дополнительно: Изменение тени при наведении и раскрытии */
   :global(.MuiAccordion-root:hover) {
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.3);
   }
 
   :global(.MuiAccordion-root.Mui-expanded) {
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.3);
   }
 }
 

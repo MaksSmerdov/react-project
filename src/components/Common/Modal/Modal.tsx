@@ -1,57 +1,47 @@
 import React from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  IconButton,
-  Zoom,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import ReactModal from "react-modal";
 import styles from "./Modal.module.scss";
-import { TransitionProps } from "@mui/material/transitions";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
-) {
-  return <Zoom ref={ref} {...props} timeout={{ enter: 500, exit: 500 }} />;
-});
 
 interface CustomModalProps {
-  open: boolean;
+  isOpen: boolean;
   title: string;
   children: React.ReactNode;
   onClose: () => void;
 }
 
-const CustomModal: React.FC<CustomModalProps> = ({ open, title, children, onClose }) => {
+const CustomModal: React.FC<CustomModalProps> = ({ isOpen, title, children, onClose }) => {
+  // Обязательно укажите элемент для привязки модалки
+  ReactModal.setAppElement("#root");
+
   return (
-    <Dialog
-      open={open}
-      onClose={(event, reason) => {
-        if (reason === "backdropClick") return; // Игнорируем закрытие на фоне
-        onClose(); // Закрытие при других причинах
+    <ReactModal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className={{
+        base: styles.modalPaper,
+        afterOpen: styles.modalPaperAfterOpen, // Стили при открытии
+        beforeClose: styles.modalPaperBeforeClose, // Стили при закрытии
       }}
-      TransitionComponent={Transition}
-      classes={{ paper: styles.modalPaper }}
+      overlayClassName={{
+        base: styles.modalOverlay,
+        afterOpen: styles.modalOverlayAfterOpen, // Класс после открытия оверлея
+        beforeClose: styles.modalOverlayBeforeClose, // Класс перед закрытием оверлея
+      }}
+      closeTimeoutMS={500} // Анимация закрытия (в миллисекундах)
+      shouldCloseOnOverlayClick={false} // Закрытие при клике на фон
     >
-      <DialogTitle className={styles.modalTitle}>
-        <span className={styles.modalTitleText}>{title}</span>
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
+      <div className={styles.modalHeader}>
+        <h2 className={styles.modalTitle}>{title}</h2>
+        <button
           className={styles.closeButton}
-          size="small"
+          aria-label="Close"
+          onClick={onClose}
         >
-          <CloseIcon 
-          className={styles.closeKrest}
-          />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>{children}</DialogContent>
-      <DialogActions></DialogActions>
-    </Dialog>
+          ✖
+        </button>
+      </div>
+      <div className={styles.modalContent}>{children}</div>
+    </ReactModal>
   );
 };
 
