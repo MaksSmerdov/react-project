@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import styles from './HomePage.module.scss';
+import MnemoSushilka from "../components/Mnemo/sushilka/MnemoSushilka";
+import CurrentParameterUniversal from "../components/Common/CurrentParameterUniversal/CurrentParameterUniversal";
+import { apiConfigs } from "../configs/apiConfigSushilka";
+
+
 
 const HomePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'sushilka-1' | 'sushilka-2' | null>(null);
-  const [iframeSrc, setIframeSrc] = useState<string>('');
-  const [iframeError, setIframeError] = useState<string | null>(null);
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const [activeComponent, setActiveComponent] = useState<React.ReactNode>(null);
 
   const tabs = [
     { id: 'sushilka-1', label: 'Сушилка-1' },
@@ -13,42 +16,20 @@ const HomePage: React.FC = () => {
   ];
 
   const subTabs: {
-    'sushilka-1': { label: string; url: string }[];
-    'sushilka-2': { label: string; url: string }[];
+    'sushilka-1': { label: string; component: React.ReactNode }[];
+    'sushilka-2': { label: string; component: React.ReactNode }[];
   } = {
     'sushilka-1': [
-      { label: 'Текущие параметры', url: '/currentParam-sushilka1' },
-      { label: 'Мнемосхема', url: '/mnemo-sushilka1' },
-      { label: 'Графики температур', url: '/graph-sushilki-general-temper' },
-      { label: 'Графики давл./разр.', url: '/graph-sushilki-general-pressure' },
+      { label: 'Мнемосхема', component: <MnemoSushilka configKey="sushilka1" title="Сушилка №1" objectNumber={1} /> },
+      { label: 'Текущие параметры', component: <CurrentParameterUniversal config={apiConfigs.sushilka1} title="Вращающаяся сушилка №1" /> },
+      
     ],
     'sushilka-2': [
-      { label: 'Текущие параметры', url: '/currentParam-sushilka2' },
-      { label: 'Мнемосхема', url: '/mnemo-sushilka2' },
-      { label: 'Графики температур', url: '/graph-sushilki-general-temper' },
-      { label: 'Графики давл./разр.', url: '/graph-sushilki-general-pressure' },
+      { label: 'Мнемосхема', component: <MnemoSushilka configKey="sushilka2" title="Сушилка №2" objectNumber={2} /> },
+      { label: 'Текущие параметры', component: <CurrentParameterUniversal config={apiConfigs.sushilka2} title="Вращающаяся сушилка №2" /> },
+      
     ],
   };
-
-  const adjustIframeHeight = () => {
-    if (iframeRef.current) {
-      try {
-        const iframe = iframeRef.current;
-        const height = iframe.contentWindow?.document.body.scrollHeight || 500; // Установка минимальной высоты
-        iframe.style.height = `${height + 100}px`; // Добавляем отступ
-      } catch (error) {
-        console.error('Ошибка при вычислении высоты iframe:', error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (iframeSrc) {
-      setIframeError(null); // Сбрасываем ошибку
-      const timer = setTimeout(() => adjustIframeHeight(), 100);
-      return () => clearTimeout(timer);
-    }
-  }, [iframeSrc]);
 
   return (
     <div className={styles['container']}>
@@ -58,7 +39,7 @@ const HomePage: React.FC = () => {
             key={tab.id}
             onClick={() => {
               setActiveTab(tab.id as 'sushilka-1' | 'sushilka-2');
-              setIframeSrc(subTabs[tab.id as 'sushilka-1' | 'sushilka-2'][1].url);
+              setActiveComponent(subTabs[tab.id as 'sushilka-1' | 'sushilka-2'][0].component); // По умолчанию отображаем первый компонент
             }}
             className={`${styles['tab-container__button']} ${
               activeTab === tab.id ? styles['tab-container__button--active'] : ''
@@ -77,7 +58,7 @@ const HomePage: React.FC = () => {
               {subTabs[activeTab].map((subTab, index) => (
                 <button
                   key={index}
-                  onClick={() => setIframeSrc(subTab.url)}
+                  onClick={() => setActiveComponent(subTab.component)}
                   className={styles['sub-tab-button']}
                 >
                   {subTab.label}
@@ -88,19 +69,9 @@ const HomePage: React.FC = () => {
         )}
       </div>
 
-      {iframeSrc && (
-        <div className={styles['iframe-container']}>
-          <iframe
-            ref={iframeRef}
-            src={iframeSrc}
-            title="Content Frame"
-            style={{ width: '100%', border: 'none', height: '600px' }} // Устанавливаем стандартную высоту
-            onLoad={adjustIframeHeight}
-            onError={() => setIframeError('Ошибка загрузки контента')}
-          />
-          {iframeError && <div className={styles['error']}>{iframeError}</div>}
-        </div>
-      )}
+      <div className={styles['component-container']}>
+        {activeComponent}
+      </div>
     </div>
   );
 };
