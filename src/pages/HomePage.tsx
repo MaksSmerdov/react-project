@@ -3,6 +3,7 @@ import styles from './HomePage.module.scss';
 import MnemoSushilka from "../components/Mnemo/sushilka/MnemoSushilka";
 import CurrentParameterUniversal from "../components/Common/CurrentParameterUniversal/CurrentParameterUniversal";
 import { apiConfigs } from "../configs/apiConfigSushilka";
+import TemperatureChart from "../components/Charts/Chart";
 
 
 
@@ -22,6 +23,7 @@ const HomePage: React.FC = () => {
     'sushilka-1': [
       { label: 'Мнемосхема', component: <MnemoSushilka configKey="sushilka1" title="Сушилка №1" objectNumber={1} /> },
       { label: 'Текущие параметры', component: <CurrentParameterUniversal config={apiConfigs.sushilka1} title="Вращающаяся сушилка №1" /> },
+      { label: 'График', component: <TemperatureChart /> },
       
     ],
     'sushilka-2': [
