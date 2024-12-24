@@ -3,7 +3,9 @@ import { ChartOptions } from 'chart.js';
 export const getChartOptions = (
     startTime: number,
     endTime: number,
-    title: string
+    title: string,
+    yMin?: number, // Новый аргумент для минимального значения оси Y
+    yMax?: number  // Новый аргумент для максимального значения оси Y
 ): ChartOptions<'line'> => ({
     responsive: true,
     animation: false,
@@ -107,6 +109,8 @@ export const getChartOptions = (
         },
         y: {
             beginAtZero: false,
+            min: yMin, // Используем переданное минимальное значение
+            max: yMax, // Используем переданное максимальное значение
         },
     },
     elements: {

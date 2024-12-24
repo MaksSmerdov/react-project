@@ -32,9 +32,11 @@ ChartJS.register(
 interface TemperatureChartProps {
     apiUrl: string;
     title: string; // Новый проп для заголовка графика
+    yMin?: number; // Новый проп для минимального значения оси Y
+    yMax?: number; // Новый проп для максимального значения оси Y
 }
 
-const TemperatureChart: React.FC<TemperatureChartProps> = ({ apiUrl, title }) => {
+const TemperatureChart: React.FC<TemperatureChartProps> = ({ apiUrl, title, yMin, yMax }) => {
     const chartRef = useRef<ChartJS<'line'> | null>(null);
     const [startTime, setStartTime] = useState(new Date(Date.now() - 30 * 60 * 1000));
     const [endTime, setEndTime] = useState(new Date());
@@ -123,7 +125,9 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({ apiUrl, title }) =>
     const options: ChartOptions<'line'> = getChartOptions(
         startTime.getTime(),
         endTime.getTime(),
-        title // Передаем заголовок
+        title,
+        yMin, // Передаем минимальное значение оси Y
+        yMax  // Передаем максимальное значение оси Y
     );
 
     options.responsive = false;

@@ -27,8 +27,17 @@ const HomePage: React.FC = () => {
         label: 'Графики',
         component: (
           <div> 
-            <TemperatureChart apiUrl="http://localhost:3002/api/sushilka1/data" title="Температуры сушилки №1" />
-            <TemperatureChart apiUrl="http://localhost:3002/api/sushilka2/data" title="Температуры сушилки №2" />
+            <TemperatureChart 
+            apiUrl="http://localhost:3002/api/sushilka1/data" 
+            title="Температуры сушилки №1" 
+            yMin = {0}
+            yMax = {300} />
+
+            <TemperatureChart 
+            apiUrl="http://localhost:3002/api/sushilka2/data" 
+            title="Температуры сушилки №2" 
+            yMin = {0}
+            yMax = {300} />
           </div>
         ),
       },
