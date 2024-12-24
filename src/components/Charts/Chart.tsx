@@ -1,6 +1,4 @@
-// src/components/Charts/Chart.tsx
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -31,14 +29,19 @@ ChartJS.register(
     CrosshairPlugin
 );
 
-const TemperatureChart: React.FC = () => {
+interface TemperatureChartProps {
+    apiUrl: string;
+    title: string; // Новый проп для заголовка графика
+}
+
+const TemperatureChart: React.FC<TemperatureChartProps> = ({ apiUrl, title }) => {
+    const chartRef = useRef<ChartJS<'line'> | null>(null);
     const [startTime, setStartTime] = useState(new Date(Date.now() - 30 * 60 * 1000));
     const [endTime, setEndTime] = useState(new Date());
-    const [allHidden, setAllHidden] = useState(false); // Состояние для управления видимостью всех данных
+    const [allHidden, setAllHidden] = useState(false);
 
-    const { data, error, refetch } = useTemperatureData(startTime, endTime);
+    const { data, error, refetch } = useTemperatureData(apiUrl, startTime, endTime);
 
-    // Обновление времени каждые 5 секунд
     useEffect(() => {
         const interval = setInterval(() => {
             setEndTime(new Date());
@@ -48,7 +51,6 @@ const TemperatureChart: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Перезагрузка данных при изменении времени
     useEffect(() => {
         refetch();
     }, [startTime, endTime, refetch]);
@@ -68,15 +70,16 @@ const TemperatureChart: React.FC = () => {
     };
 
     const handleToggleAll = () => {
-        const chart = ChartJS.getChart("temperatureChart"); // Получение экземпляра графика
-        if (chart) {
-            chart.data.datasets.forEach((_, index) => {
-                const meta = chart.getDatasetMeta(index);
-                meta.hidden = !allHidden; // Скрыть или показать все
+        if (chartRef.current) {
+            chartRef.current.data.datasets.forEach((_, index) => {
+                const meta = chartRef.current?.getDatasetMeta(index);
+                if (meta) {
+                    meta.hidden = !allHidden;
+                }
             });
-            chart.update(); // Обновить график
+            chartRef.current.update();
         }
-        setAllHidden(!allHidden); // Обновить состояние кнопки
+        setAllHidden(!allHidden);
     };
 
     if (error) {
@@ -119,21 +122,20 @@ const TemperatureChart: React.FC = () => {
 
     const options: ChartOptions<'line'> = getChartOptions(
         startTime.getTime(),
-        endTime.getTime()
+        endTime.getTime(),
+        title // Передаем заголовок
     );
 
-    // Отключаем отзывчивость, чтобы использовать фиксированные размеры
     options.responsive = false;
 
     return (
         <div>
-            <h2>Температуры за последние 30 минут</h2>
             <Line
-                id="temperatureChart"
+                ref={chartRef}
                 data={chartData}
                 options={options}
-                width={2000}  // Установите желаемую ширину
-                height={400} // Установите желаемую высоту
+                width={2000}
+                height={400}
             />
             <div style={{ marginTop: '20px' }}>
                 <button onClick={handleBackward}>Назад</button>

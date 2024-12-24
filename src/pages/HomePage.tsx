@@ -23,7 +23,15 @@ const HomePage: React.FC = () => {
     'sushilka-1': [
       { label: 'Мнемосхема', component: <MnemoSushilka configKey="sushilka1" title="Сушилка №1" objectNumber={1} /> },
       { label: 'Текущие параметры', component: <CurrentParameterUniversal config={apiConfigs.sushilka1} title="Вращающаяся сушилка №1" /> },
-      { label: 'График', component: <TemperatureChart /> },
+      {
+        label: 'Графики',
+        component: (
+          <div> 
+            <TemperatureChart apiUrl="http://localhost:3002/api/sushilka1/data" title="Температуры сушилки №1" />
+            <TemperatureChart apiUrl="http://localhost:3002/api/sushilka2/data" title="Температуры сушилки №2" />
+          </div>
+        ),
+      },
       
     ],
     'sushilka-2': [

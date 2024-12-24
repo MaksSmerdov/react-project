@@ -1,10 +1,9 @@
-// src/components/Charts/ChartConfig.ts
-
 import { ChartOptions } from 'chart.js';
 
 export const getChartOptions = (
     startTime: number,
-    endTime: number
+    endTime: number,
+    title: string
 ): ChartOptions<'line'> => ({
     responsive: true,
     animation: false,
@@ -13,6 +12,19 @@ export const getChartOptions = (
         intersect: false,
     },
     plugins: {
+        title: {
+            display: true,
+            text: title,
+            font: {
+                size: 18,
+                weight: 'bold',
+            },
+            color: 'green',
+            padding: {
+                top: 10,
+                bottom: 20,
+            },
+        },
         legend: {
             display: true,
             position: 'right',
@@ -27,7 +39,7 @@ export const getChartOptions = (
                             text: `${value} | ${label}`, // Формат «Значение | Название»
                             fillStyle: dataset.borderColor as string,
                             hidden: !chart.isDatasetVisible(index),
-                            datasetIndex: index, // Ссылка на индекс набора данных
+                            datasetIndex: index,
                         };
                     });
                 },
@@ -36,9 +48,28 @@ export const getChartOptions = (
         tooltip: {
             enabled: true,
             callbacks: {
-                label: function (context) {
+                title: (tooltipItems) => {
+                    if (tooltipItems.length > 0) {
+                        const parsedTime = tooltipItems[0].parsed.x; // Берем исходное значение времени
+                        if (typeof parsedTime === 'number') {
+                            const date = new Date(parsedTime);
+                            const dateString = date.toLocaleDateString('ru-RU', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: '2-digit',
+                            });
+                            const timeString = date.toLocaleTimeString('ru-RU', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                            });
+                            return `${dateString} ${timeString}`; // Форматируем в "24.12.24 16:00"
+                        }
+                    }
+                    return ''; // Возвращаем пустую строку, если данных нет
+                },
+                label: (context) => {
                     const label = context.dataset.label || '';
-                    const value = context.parsed.y !== null ? context.parsed.y : '';
+                    const value = context.raw !== null ? context.raw : '—';
                     return `${label}: ${value}°C`;
                 },
             },
@@ -61,7 +92,7 @@ export const getChartOptions = (
     },
     scales: {
         x: {
-            type: 'time', // Вернули 'time' вместо 'timeseries'
+            type: 'time',
             time: {
                 unit: 'minute',
                 displayFormats: {
@@ -71,11 +102,16 @@ export const getChartOptions = (
             ticks: {
                 maxTicksLimit: 20,
             },
-            min: startTime, // Преобразовано в миллисекунды
-            max: endTime + 3 * 60 * 1000, // Преобразовано в миллисекунды с отступом 5 минут
+            min: startTime,
+            max: endTime + 2 * 60 * 1000,
         },
         y: {
             beginAtZero: false,
+        },
+    },
+    elements: {
+        point: {
+            radius: 0, // Убираем радиус точек, оставляя только линии
         },
     },
 });
