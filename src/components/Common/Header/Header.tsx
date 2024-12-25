@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Header.module.scss";
+import styles from "./header.module.scss";
 
 interface HeaderProps {
   title: string;

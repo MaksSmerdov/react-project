@@ -15,7 +15,7 @@ import {
 import 'chartjs-adapter-date-fns';
 import CrosshairPlugin from 'chartjs-plugin-crosshair';
 import { useTemperatureData } from './hooks/useData';
-import { getChartOptions } from './ChartConfig';
+import { getChartOptions } from './chartConfig';
 
 ChartJS.register(
     LineElement,

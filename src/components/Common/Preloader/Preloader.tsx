@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Preloader.module.scss";
+import styles from "./preloader.module.scss";
 
 interface LoaderProps {
   loading: boolean;

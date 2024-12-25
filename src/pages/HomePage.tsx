@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import styles from './HomePage.module.scss';
-import MnemoSushilka from "../components/Mnemo/sushilka/MnemoSushilka";
-import CurrentParameterUniversal from "../components/Common/CurrentParameterUniversal/CurrentParameterUniversal";
+import styles from './homePage.module.scss';
+import MnemoSushilka from "../components/Mnemo/sushilka/mnemoSushilka";
+import CurrentParameterUniversal from "../components/Common/CurrentParameterUniversal/currentParameterUniversal";
 import { apiConfigs } from "../configs/apiConfigSushilka";
-import TemperatureChart from "../components/Charts/Chart";
+import TemperatureChart from "../components/Charts/chart";
 
 
 

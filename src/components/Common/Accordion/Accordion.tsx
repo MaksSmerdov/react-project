@@ -5,7 +5,7 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import styles from "./Accordion.module.scss";
+import styles from "./accordion.module.scss";
 
 interface AccordionItem {
   id: string;

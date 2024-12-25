@@ -1,5 +1,5 @@
 import React from "react";
-import CurrentParameterUniversal from "../../../components/Common/CurrentParameterUniversal/CurrentParameterUniversal";
+import CurrentParameterUniversal from "../../../components/Common/CurrentParameterUniversal/currentParameterUniversal";
 import { apiConfigs } from "../../../configs/apiConfigSushilka";
 
 const CurrentParameterSushilka1: React.FC = () => {

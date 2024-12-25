@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./ControlButtons.module.scss";
+import styles from "./controlButtons.module.scss";
 
 interface ControlButtonsProps {
   tooltipsEnabled?: boolean;

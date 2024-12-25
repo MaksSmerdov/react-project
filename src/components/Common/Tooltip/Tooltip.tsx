@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import styles from "./Tooltip.module.scss";
+import styles from "./tooltip.module.scss";
 
 interface TooltipProps {
   tooltipId: string;

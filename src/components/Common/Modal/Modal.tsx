@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-import styles from "./Modal.module.scss";
+import styles from "./modal.module.scss";
 
 interface CustomModalProps {
   isOpen: boolean;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./KranComponent.module.scss";
+import styles from "./kranComponent.module.scss";
 
 interface KranProps {
   size?: { width: number; height: number };

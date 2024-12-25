@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import styles from './MnemoSushilka.module.scss';
+import styles from './mnemoSushilka.module.scss';
 import { apiConfigs } from '../../../configs/apiConfigSushilka';
 import useMnemoSushilka from './useMnemoSushilka';
-import CustomModal from '../../Common/Modal/Modal';
-import DocumentationAccordion from '../../Common/Accordion/Accordion';
-import { accordionData } from './AccordionItems';
-import Tooltip from '../../Common/Tooltip/Tooltip';
-import Kran from '../../Common/Kran/KranComponent';
-import Loader from '../../Common/Preloader/Preloader';
-import ControlButtons from '../../Common/ControlButtons/ControlButtons';
-import { staticLabels, tooltippedParams, gorelkaGifs, getTooltipContent, renderGIF } from './MnemoUtils';
-import Header from '../../Common/Header/Header';
+import CustomModal from '../../Common/Modal/modal';
+import DocumentationAccordion from '../../Common/Accordion/accordion';
+import { accordionData } from './accordionItems';
+import Tooltip from '../../Common/Tooltip/tooltip';
+import Kran from '../../Common/Kran/kranComponent';
+import Loader from '../../Common/Preloader/preloader';
+import ControlButtons from '../../Common/ControlButtons/controlButtons';
+import { staticLabels, tooltippedParams, gorelkaGifs, getTooltipContent, renderGIF } from './mnemoUtils';
+import Header from '../../Common/Header/header';
 
 interface MnemoSushilkaProps<K extends keyof typeof apiConfigs> {
   configKey: K;

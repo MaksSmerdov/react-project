@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Header from "../Header/Header";
-import Table from "../Table/Table";
+import Header from "../Header/header";
+import Table from "../Table/table";
 import styles from "./currentParameterUniversal.module.scss";
 import { ApiConfig } from "../../../configs/apiConfigSushilka";
 

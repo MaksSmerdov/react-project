@@ -1,6 +1,6 @@
 import React from "react";
-import { TooltipItems } from "./TooltipItems";
-import styles from "./MnemoSushilka.module.scss";
+import { TooltipItems } from "./tooltipItems";
+import styles from "./mnemoSushilka.module.scss";
 
 // Функция для получения контента тултипа
 export const getTooltipContent = (tooltipId: string): React.ReactNode => {
